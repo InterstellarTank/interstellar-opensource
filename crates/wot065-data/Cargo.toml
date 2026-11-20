@@ -1,0 +1,23 @@
+[package]
+name = "wot065-data"
+version = "0.1.0"
+edition = "2021"
+description = "WoT 0.6.5 account/garage data layer: vehicle catalog, Python-2 pickle codec, account sync diff / shop / dossier / showGUI payload builders"
+license = "MIT"
+
+[lib]
+name = "wot065_data"
+path = "src/lib.rs"
+
+[[bin]]
+name = "wot065-data"
+path = "src/main.rs"
+
+[dependencies]
+wg-toolkit = { path = "../../vendor/wg-toolkit-rs/wg-toolkit" }
+flate2 = "1"
+crc32fast = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+base64 = "0.22"
+

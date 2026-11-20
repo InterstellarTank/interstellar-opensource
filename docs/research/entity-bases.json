@@ -1,0 +1,5224 @@
+{
+ "formatVersion": 1,
+ "generatedBy": ".scratch/research/bwxml/build_entity_tables.py",
+ "convention": "Slot ids are BigWorld EXPOSED method indices, 0-based, assigned per direction over the flattened method list (interfaces first in <Implements> order, then the entity's own list, document order). All ClientMethods are exposed; Base/Cell methods only with <Exposed/>. When >62 methods are exposed, ids >= begSubSlot use top-index + u8 sub-index (BigWorld sub-slot scheme); no 0.6.5 entity reaches it (max exposed client methods: 23).",
+ "entityTypeIDs": {
+  "Account": 1,
+  "Avatar": 2,
+  "Admin": 3,
+  "Arena": 4,
+  "ArenaMgr": 5,
+  "Vehicle": 6,
+  "Projectile": 7,
+  "AreaDestructibles": 8,
+  "TeamBase": 9,
+  "ChatChannel": 10,
+  "Registrator": 11,
+  "OfflineEntity": 12,
+  "SysMessenger": 13,
+  "InviteManager": 14,
+  "BaseAppChatManager": 15,
+  "Clan": 16,
+  "Node": 17,
+  "Prebattle": 18,
+  "InvoiceManager": 19,
+  "AccountRenamer": 20,
+  "VoiceChatMgr": 21,
+  "MessageFilterManager": 22,
+  "Flock": 23
+ },
+ "entities": {
+  "Account": {
+   "typeID": 1,
+   "clientMethodIds": {
+    "onChatAction": {
+     "exposedId": 0,
+     "wireTopIndex": 0,
+     "wireSubIndex": null,
+     "internalIndex": 0,
+     "args": [
+      "CHAT_ACTION_DATA"
+     ],
+     "argsResolved": [
+      "FIXED_DICT"
+     ],
+     "returnValues": []
+    },
+    "version_eu6501": {
+     "exposedId": 1,
+     "wireTopIndex": 1,
+     "wireSubIndex": null,
+     "internalIndex": 1,
+     "args": [],
+     "argsResolved": [],
+     "returnValues": []
+    },
+    "onCmdResponse": {
+     "exposedId": 2,
+     "wireTopIndex": 2,
+     "wireSubIndex": null,
+     "internalIndex": 2,
+     "args": [
+      "INT16",
+      "INT16"
+     ],
+     "argsResolved": [
+      "INT16",
+      "INT16"
+     ],
+     "returnValues": []
+    },
+    "onCmdResponseExt": {
+     "exposedId": 3,
+     "wireTopIndex": 3,
+     "wireSubIndex": null,
+     "internalIndex": 3,
+     "args": [
+      "INT16",
+      "INT16",
+      "STRING"
+     ],
+     "argsResolved": [
+      "INT16",
+      "INT16",
+      "STRING"
+     ],
+     "returnValues": []
+    },
+    "onKickedFromServer": {
+     "exposedId": 4,
+     "wireTopIndex": 4,
+     "wireSubIndex": null,
+     "internalIndex": 4,
+     "args": [
+      "STRING",
+      "BOOL",
+      "UINT32"
+     ],
+     "argsResolved": [
+      "STRING",
+      "UNKNOWN",
+      "UINT32"
+     ],
+     "returnValues": []
+    },
+    "onEnqueued": {
+     "exposedId": 5,
+     "wireTopIndex": 5,
+     "wireSubIndex": null,
+     "internalIndex": 5,
+     "args": [],
+     "argsResolved": [],
+     "returnValues": []
+    },
+    "onEnqueueFailure": {
+     "exposedId": 6,
+     "wireTopIndex": 6,
+     "wireSubIndex": null,
+     "internalIndex": 6,
+     "args": [
+      "UINT8"
+     ],
+     "argsResolved": [
+      "UINT8"
+     ],
+     "returnValues": []
+    },
+    "onDequeued": {
+     "exposedId": 7,
+     "wireTopIndex": 7,
+     "wireSubIndex": null,
+     "internalIndex": 7,
+     "args": [],
+     "argsResolved": [],
+     "returnValues": []
+    },
+    "onArenaCreated": {
+     "exposedId": 8,
+     "wireTopIndex": 8,
+     "wireSubIndex": null,
+     "internalIndex": 8,
+     "args": [],
+     "argsResolved": [],
+     "returnValues": []
+    },
+    "onArenaJoinFailure": {
+     "exposedId": 9,
+     "wireTopIndex": 9,
+     "wireSubIndex": null,
+     "internalIndex": 9,
+     "args": [
+      "UINT8"
+     ],
+     "argsResolved": [
+      "UINT8"
+     ],
+     "returnValues": []
+    },
+    "onPrebattleJoined": {
+     "exposedId": 10,
+     "wireTopIndex": 10,
+     "wireSubIndex": null,
+     "internalIndex": 10,
+     "args": [
+      "OBJECT_ID"
+     ],
+     "argsResolved": [
+      "OBJECT_ID"
+     ],
+     "returnValues": []
+    },
+    "onPrebattleJoinFailure": {
+     "exposedId": 11,
+     "wireTopIndex": 11,
+     "wireSubIndex": null,
+     "internalIndex": 11,
+     "args": [
+      "UINT8"
+     ],
+     "argsResolved": [
+      "UINT8"
+     ],
+     "returnValues": []
+    },
+    "onPrebattleLeft": {
+     "exposedId": 12,
+     "wireTopIndex": 12,
+     "wireSubIndex": null,
+     "internalIndex": 12,
+     "args": [],
+     "argsResolved": [],
+     "returnValues": []
+    },
+    "onKickedFromQueue": {
+     "exposedId": 13,
+     "wireTopIndex": 13,
+     "wireSubIndex": null,
+     "internalIndex": 13,
+     "args": [],
+     "argsResolved": [],
+     "returnValues": []
+    },
+    "onKickedFromArena": {
+     "exposedId": 14,
+     "wireTopIndex": 14,
+     "wireSubIndex": null,
+     "internalIndex": 14,
+     "args": [
+      "UINT8"
+     ],
+     "argsResolved": [
+      "UINT8"
+     ],
+     "returnValues": []
+    },
+    "onKickedFromPrebattle": {
+     "exposedId": 15,
+     "wireTopIndex": 15,
+     "wireSubIndex": null,
+     "internalIndex": 15,
+     "args": [
+      "UINT8"
+     ],
+     "argsResolved": [
+      "UINT8"
+     ],
+     "returnValues": []
+    },
+    "showGUI": {
+     "exposedId": 16,
+     "wireTopIndex": 16,
+     "wireSubIndex": null,
+     "internalIndex": 16,
+     "args": [
+      "STRING"
+     ],
+     "argsResolved": [
+      "STRING"
+     ],
+     "returnValues": []
+    },
+    "receiveActiveArenas": {
+     "exposedId": 17,
+     "wireTopIndex": 17,
+     "wireSubIndex": null,
+     "internalIndex": 17,
+     "args": [
+      "ARRAY<of>PUBLIC_ARENA_INFO</of>"
+     ],
+     "argsResolved": [
+      "ARRAY"
+     ],
+     "returnValues": []
+    },
+    "receiveServerStats": {
+     "exposedId": 18,
+     "wireTopIndex": 18,
+     "wireSubIndex": null,
+     "internalIndex": 18,
+     "args": [
+      "SERVER_STATISTICS"
+     ],
+     "argsResolved": [
+      "FIXED_DICT"
+     ],
+     "returnValues": []
+    },
+    "receiveQueueInfo": {
+     "exposedId": 19,
+     "wireTopIndex": 19,
+     "wireSubIndex": null,
+     "internalIndex": 19,
+     "args": [
+      "RANDOMS_QUEUE_INFO",
+      "COMPANIES_QUEUE_INFO"
+     ],
+     "argsResolved": [
+      "FIXED_DICT",
+      "FIXED_DICT"
+     ],
+     "returnValues": []
+    },
+    "updatePrebattle": {
+     "exposedId": 20,
+     "wireTopIndex": 20,
+     "wireSubIndex": null,
+     "internalIndex": 20,
+     "args": [
+      "UINT8",
+      "STRING"
+     ],
+     "argsResolved": [
+      "UINT8",
+      "STRING"
+     ],
+     "returnValues": []
+    },
+    "update": {
+     "exposedId": 21,
+     "wireTopIndex": 21,
+     "wireSubIndex": null,
+     "internalIndex": 21,
+     "args": [
+      "STRING"
+     ],
+     "argsResolved": [
+      "STRING"
+     ],
+     "returnValues": []
+    },
+    "resyncDossiers": {
+     "exposedId": 22,
+     "wireTopIndex": 22,
+     "wireSubIndex": null,
+     "internalIndex": 22,
+     "args": [],
+     "argsResolved": [],
+     "returnValues": []
+    }
+   },
+   "baseMethodSlots": {
+    "onVOIPCredentialsReceived": {
+     "internalIndex": 0,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "STRING"
+     ],
+     "argsResolved": [
+      "STRING",
+      "STRING"
+     ]
+    },
+    "joinChatChannel": {
+     "internalIndex": 1,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "STRING"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "STRING"
+     ]
+    },
+    "leaveChatChannel": {
+     "internalIndex": 2,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID"
+     ],
+     "argsResolved": [
+      "OBJECT_ID"
+     ]
+    },
+    "onChatAction": {
+     "internalIndex": 3,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "CHAT_ACTION_DATA"
+     ],
+     "argsResolved": [
+      "FIXED_DICT"
+     ]
+    },
+    "chatCommand": {
+     "internalIndex": 4,
+     "exposed": true,
+     "exposedId": 0,
+     "args": [
+      "INT64",
+      "UINT8",
+      "OBJECT_ID",
+      "INT64",
+      "INT16",
+      "STRING",
+      "STRING",
+      "MAILBOX"
+     ],
+     "argsResolved": [
+      "INT64",
+      "UINT8",
+      "OBJECT_ID",
+      "INT64",
+      "INT16",
+      "STRING",
+      "STRING",
+      "MAILBOX"
+     ]
+    },
+    "inviteCommand": {
+     "internalIndex": 5,
+     "exposed": true,
+     "exposedId": 1,
+     "args": [
+      "INT64",
+      "UINT8",
+      "INT8",
+      "STRING",
+      "INT64",
+      "INT16",
+      "STRING",
+      "STRING"
+     ],
+     "argsResolved": [
+      "INT64",
+      "UINT8",
+      "INT8",
+      "STRING",
+      "INT64",
+      "INT16",
+      "STRING",
+      "STRING"
+     ]
+    },
+    "ackCommand": {
+     "internalIndex": 6,
+     "exposed": true,
+     "exposedId": 2,
+     "args": [
+      "INT64",
+      "UINT8",
+      "FLOAT64",
+      "INT64",
+      "INT64"
+     ],
+     "argsResolved": [
+      "INT64",
+      "UINT8",
+      "FLOAT64",
+      "INT64",
+      "INT64"
+     ]
+    },
+    "keepAlive": {
+     "internalIndex": 7,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "INT16"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "INT16"
+     ]
+    },
+    "onAccountKept": {
+     "internalIndex": 8,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "INT32"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "INT32"
+     ]
+    },
+    "onAccountPropertiesChanged": {
+     "internalIndex": 9,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "INT32",
+      "INT32"
+     ],
+     "argsResolved": [
+      "INT32",
+      "INT32"
+     ]
+    },
+    "receiveProperties": {
+     "internalIndex": 10,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "DB_ID",
+      "INT32",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "DB_ID",
+      "INT32",
+      "PYTHON"
+     ]
+    },
+    "onGiftsAdded": {
+     "internalIndex": 11,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "INT32",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "INT32",
+      "PYTHON"
+     ]
+    },
+    "onTransactionMessage": {
+     "internalIndex": 12,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "UINT8",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "UINT8",
+      "PYTHON"
+     ]
+    },
+    "onEnqueued": {
+     "internalIndex": 13,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "onDequeued": {
+     "internalIndex": 14,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "onArenaCreated": {
+     "internalIndex": 15,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "UINT64",
+      "OBJECT_ID",
+      "UINT8",
+      "INT32"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "UINT64",
+      "OBJECT_ID",
+      "UINT8",
+      "INT32"
+     ]
+    },
+    "onArenaJoined": {
+     "internalIndex": 16,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT64",
+      "INT32"
+     ],
+     "argsResolved": [
+      "UINT64",
+      "INT32"
+     ]
+    },
+    "onArenaJoinFailure": {
+     "internalIndex": 17,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT64",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "UINT64",
+      "UINT8"
+     ]
+    },
+    "onPrebattleJoined": {
+     "internalIndex": 18,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "UNKNOWN"
+     ]
+    },
+    "onPrebattleJoinFailure": {
+     "internalIndex": 19,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "UINT8"
+     ]
+    },
+    "onPrebattleLeft": {
+     "internalIndex": 20,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID"
+     ],
+     "argsResolved": [
+      "OBJECT_ID"
+     ]
+    },
+    "onKickedFromQueue": {
+     "internalIndex": 21,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "onKickedFromArena": {
+     "internalIndex": 22,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT64",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "UINT64",
+      "UINT8"
+     ]
+    },
+    "onKickedFromPrebattle": {
+     "internalIndex": 23,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "UINT8"
+     ]
+    },
+    "onVehicleLeftArena": {
+     "internalIndex": 24,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "INT32",
+      "BATTLE_RESULTS_EXT"
+     ],
+     "argsResolved": [
+      "INT32",
+      "FIXED_DICT"
+     ]
+    },
+    "onPrebattleResponse": {
+     "internalIndex": 25,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "INT16",
+      "BOOL",
+      "INT32"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "INT16",
+      "UNKNOWN",
+      "INT32"
+     ]
+    },
+    "onPrebattleVehicleChanged": {
+     "internalIndex": 26,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "INT32"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "INT32"
+     ]
+    },
+    "onDBActionCompleted": {
+     "internalIndex": 27,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "PYTHON",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "STRING",
+      "PYTHON",
+      "PYTHON"
+     ]
+    },
+    "onVoipAccountCreated": {
+     "internalIndex": 28,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING"
+     ],
+     "argsResolved": [
+      "STRING"
+     ]
+    },
+    "doCmdStr": {
+     "internalIndex": 29,
+     "exposed": true,
+     "exposedId": 3,
+     "args": [
+      "INT16",
+      "INT16",
+      "STRING"
+     ],
+     "argsResolved": [
+      "INT16",
+      "INT16",
+      "STRING"
+     ]
+    },
+    "doCmdInt3": {
+     "internalIndex": 30,
+     "exposed": true,
+     "exposedId": 4,
+     "args": [
+      "INT16",
+      "INT16",
+      "INT32",
+      "INT32",
+      "INT32"
+     ],
+     "argsResolved": [
+      "INT16",
+      "INT16",
+      "INT32",
+      "INT32",
+      "INT32"
+     ]
+    },
+    "doCmdInt4": {
+     "internalIndex": 31,
+     "exposed": true,
+     "exposedId": 5,
+     "args": [
+      "INT16",
+      "INT16",
+      "INT32",
+      "INT32",
+      "INT32",
+      "INT32"
+     ],
+     "argsResolved": [
+      "INT16",
+      "INT16",
+      "INT32",
+      "INT32",
+      "INT32",
+      "INT32"
+     ]
+    },
+    "doCmdInt2Str": {
+     "internalIndex": 32,
+     "exposed": true,
+     "exposedId": 6,
+     "args": [
+      "INT16",
+      "INT16",
+      "INT32",
+      "INT32",
+      "STRING"
+     ],
+     "argsResolved": [
+      "INT16",
+      "INT16",
+      "INT32",
+      "INT32",
+      "STRING"
+     ]
+    },
+    "doCmdIntArr": {
+     "internalIndex": 33,
+     "exposed": true,
+     "exposedId": 7,
+     "args": [
+      "INT16",
+      "INT16",
+      "ARRAY<of>INT32</of>"
+     ],
+     "argsResolved": [
+      "INT16",
+      "INT16",
+      "ARRAY"
+     ]
+    },
+    "makeTradeOfferByClient": {
+     "internalIndex": 34,
+     "exposed": true,
+     "exposedId": 8,
+     "args": [
+      "INT16",
+      "STRING",
+      "UINT16",
+      "DB_ID",
+      "INT32",
+      "INT32",
+      "INT32",
+      "INT32"
+     ],
+     "argsResolved": [
+      "INT16",
+      "STRING",
+      "UINT16",
+      "DB_ID",
+      "INT32",
+      "INT32",
+      "INT32",
+      "INT32"
+     ]
+    },
+    "createTraining": {
+     "internalIndex": 35,
+     "exposed": true,
+     "exposedId": 9,
+     "args": [
+      "INT32",
+      "INT32",
+      "BOOL",
+      "STRING"
+     ],
+     "argsResolved": [
+      "INT32",
+      "INT32",
+      "UNKNOWN",
+      "STRING"
+     ]
+    },
+    "createSquad": {
+     "internalIndex": 36,
+     "exposed": true,
+     "exposedId": 10,
+     "args": [],
+     "argsResolved": []
+    },
+    "createCompany": {
+     "internalIndex": 37,
+     "exposed": true,
+     "exposedId": 11,
+     "args": [
+      "BOOL",
+      "STRING"
+     ],
+     "argsResolved": [
+      "UNKNOWN",
+      "STRING"
+     ]
+    },
+    "receiveActiveArenas": {
+     "internalIndex": 38,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "PYTHON"
+     ]
+    },
+    "receivePrebattleRoster": {
+     "internalIndex": 39,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "PYTHON"
+     ]
+    },
+    "updatePrebattle": {
+     "internalIndex": 40,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "UINT8",
+      "STRING"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "UINT8",
+      "STRING"
+     ]
+    },
+    "createAvatar": {
+     "internalIndex": 41,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "UINT64",
+      "INT32",
+      "UINT8",
+      "PYTHON",
+      "UINT8",
+      "UINT8",
+      "VECTOR3",
+      "FLOAT32",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "UINT64",
+      "INT32",
+      "UINT8",
+      "PYTHON",
+      "UINT8",
+      "UINT8",
+      "VECTOR3",
+      "FLOAT32",
+      "PYTHON"
+     ]
+    },
+    "setActiveVehicle": {
+     "internalIndex": 42,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT64",
+      "MAILBOX"
+     ],
+     "argsResolved": [
+      "UINT64",
+      "MAILBOX"
+     ]
+    },
+    "keepAliveFor": {
+     "internalIndex": 43,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT8",
+      "UINT16",
+      "MAILBOX",
+      "INT32"
+     ],
+     "argsResolved": [
+      "UINT8",
+      "UINT16",
+      "MAILBOX",
+      "INT32"
+     ]
+    },
+    "stopKeepingAlive": {
+     "internalIndex": 44,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT8"
+     ],
+     "argsResolved": [
+      "UINT8"
+     ]
+    },
+    "kickSelf": {
+     "internalIndex": 45,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "BOOL",
+      "UINT32"
+     ],
+     "argsResolved": [
+      "STRING",
+      "UNKNOWN",
+      "UINT32"
+     ]
+    },
+    "destroyIfNoRefs": {
+     "internalIndex": 46,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "processInvoices": {
+     "internalIndex": 47,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "fetchPrebattleInvites": {
+     "internalIndex": 48,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "setRestriction": {
+     "internalIndex": 49,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "UINT8",
+      "STRING",
+      "UINT32",
+      "UINT16",
+      "STRING"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "UINT8",
+      "STRING",
+      "UINT32",
+      "UINT16",
+      "STRING"
+     ]
+    },
+    "delRestriction": {
+     "internalIndex": 50,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "UINT8",
+      "UINT32"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "UINT8",
+      "UINT32"
+     ]
+    },
+    "setAttr": {
+     "internalIndex": 51,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "UINT64",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "UINT64",
+      "UNKNOWN"
+     ]
+    },
+    "setFinPassword": {
+     "internalIndex": 52,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "STRING",
+      "STRING",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "STRING",
+      "STRING",
+      "UNKNOWN"
+     ]
+    },
+    "setAutoBanTime": {
+     "internalIndex": 53,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "UINT32"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "UINT32"
+     ]
+    },
+    "setNextBanLevel": {
+     "internalIndex": 54,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "STRING",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "STRING",
+      "UINT8"
+     ]
+    },
+    "sendPropertiesTo": {
+     "internalIndex": 55,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "ARRAY<of>STRING</of>"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "ARRAY"
+     ]
+    },
+    "sendRosterInfoTo": {
+     "internalIndex": 56,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "UINT64"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "UINT64"
+     ]
+    },
+    "startEditing": {
+     "internalIndex": 57,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32"
+     ]
+    },
+    "stopEditing": {
+     "internalIndex": 58,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "canEdit": {
+     "internalIndex": 59,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "UINT32"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "UINT32"
+     ]
+    },
+    "addGifts": {
+     "internalIndex": 60,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "PYTHON"
+     ]
+    },
+    "wipe": {
+     "internalIndex": 61,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "UNKNOWN"
+     ]
+    },
+    "exportDiffToWeb": {
+     "internalIndex": 62,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "exportToWeb": {
+     "internalIndex": 63,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "receiveClanMemberInfo": {
+     "internalIndex": 64,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "DB_ID",
+      "STRING",
+      "STRING",
+      "DB_ID",
+      "INT32",
+      "INT32"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "DB_ID",
+      "STRING",
+      "STRING",
+      "DB_ID",
+      "INT32",
+      "INT32"
+     ]
+    },
+    "receiveClanMembersListDiff": {
+     "internalIndex": 65,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "STRING"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "STRING"
+     ]
+    },
+    "clanCommand": {
+     "internalIndex": 66,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "DB_ID",
+      "INT32",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "DB_ID",
+      "INT32",
+      "UINT8"
+     ]
+    },
+    "webClanCommand": {
+     "internalIndex": 67,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT8",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "UINT8",
+      "PYTHON"
+     ]
+    },
+    "debugRunMethod": {
+     "internalIndex": 68,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "STRING",
+      "PYTHON"
+     ]
+    }
+   },
+   "exposedBaseMethodIds": {
+    "chatCommand": {
+     "exposedId": 0,
+     "args": [
+      "INT64",
+      "UINT8",
+      "OBJECT_ID",
+      "INT64",
+      "INT16",
+      "STRING",
+      "STRING",
+      "MAILBOX"
+     ],
+     "argsResolved": [
+      "INT64",
+      "UINT8",
+      "OBJECT_ID",
+      "INT64",
+      "INT16",
+      "STRING",
+      "STRING",
+      "MAILBOX"
+     ],
+     "returnValues": []
+    },
+    "inviteCommand": {
+     "exposedId": 1,
+     "args": [
+      "INT64",
+      "UINT8",
+      "INT8",
+      "STRING",
+      "INT64",
+      "INT16",
+      "STRING",
+      "STRING"
+     ],
+     "argsResolved": [
+      "INT64",
+      "UINT8",
+      "INT8",
+      "STRING",
+      "INT64",
+      "INT16",
+      "STRING",
+      "STRING"
+     ],
+     "returnValues": []
+    },
+    "ackCommand": {
+     "exposedId": 2,
+     "args": [
+      "INT64",
+      "UINT8",
+      "FLOAT64",
+      "INT64",
+      "INT64"
+     ],
+     "argsResolved": [
+      "INT64",
+      "UINT8",
+      "FLOAT64",
+      "INT64",
+      "INT64"
+     ],
+     "returnValues": []
+    },
+    "doCmdStr": {
+     "exposedId": 3,
+     "args": [
+      "INT16",
+      "INT16",
+      "STRING"
+     ],
+     "argsResolved": [
+      "INT16",
+      "INT16",
+      "STRING"
+     ],
+     "returnValues": []
+    },
+    "doCmdInt3": {
+     "exposedId": 4,
+     "args": [
+      "INT16",
+      "INT16",
+      "INT32",
+      "INT32",
+      "INT32"
+     ],
+     "argsResolved": [
+      "INT16",
+      "INT16",
+      "INT32",
+      "INT32",
+      "INT32"
+     ],
+     "returnValues": []
+    },
+    "doCmdInt4": {
+     "exposedId": 5,
+     "args": [
+      "INT16",
+      "INT16",
+      "INT32",
+      "INT32",
+      "INT32",
+      "INT32"
+     ],
+     "argsResolved": [
+      "INT16",
+      "INT16",
+      "INT32",
+      "INT32",
+      "INT32",
+      "INT32"
+     ],
+     "returnValues": []
+    },
+    "doCmdInt2Str": {
+     "exposedId": 6,
+     "args": [
+      "INT16",
+      "INT16",
+      "INT32",
+      "INT32",
+      "STRING"
+     ],
+     "argsResolved": [
+      "INT16",
+      "INT16",
+      "INT32",
+      "INT32",
+      "STRING"
+     ],
+     "returnValues": []
+    },
+    "doCmdIntArr": {
+     "exposedId": 7,
+     "args": [
+      "INT16",
+      "INT16",
+      "ARRAY<of>INT32</of>"
+     ],
+     "argsResolved": [
+      "INT16",
+      "INT16",
+      "ARRAY"
+     ],
+     "returnValues": []
+    },
+    "makeTradeOfferByClient": {
+     "exposedId": 8,
+     "args": [
+      "INT16",
+      "STRING",
+      "UINT16",
+      "DB_ID",
+      "INT32",
+      "INT32",
+      "INT32",
+      "INT32"
+     ],
+     "argsResolved": [
+      "INT16",
+      "STRING",
+      "UINT16",
+      "DB_ID",
+      "INT32",
+      "INT32",
+      "INT32",
+      "INT32"
+     ],
+     "returnValues": []
+    },
+    "createTraining": {
+     "exposedId": 9,
+     "args": [
+      "INT32",
+      "INT32",
+      "BOOL",
+      "STRING"
+     ],
+     "argsResolved": [
+      "INT32",
+      "INT32",
+      "UNKNOWN",
+      "STRING"
+     ],
+     "returnValues": []
+    },
+    "createSquad": {
+     "exposedId": 10,
+     "args": [],
+     "argsResolved": [],
+     "returnValues": []
+    },
+    "createCompany": {
+     "exposedId": 11,
+     "args": [
+      "BOOL",
+      "STRING"
+     ],
+     "argsResolved": [
+      "UNKNOWN",
+      "STRING"
+     ],
+     "returnValues": []
+    }
+   },
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 16,
+    "clientServerProperties": 3,
+    "clientMethods": 23,
+    "clientMethodsExposed": 23,
+    "cellMethods": 0,
+    "cellMethodsExposed": 0,
+    "baseMethods": 69,
+    "baseMethodsExposed": 12
+   }
+  },
+  "Avatar": {
+   "typeID": 2,
+   "clientMethodIds": {
+    "onChatAction": {
+     "exposedId": 0,
+     "wireTopIndex": 0,
+     "wireSubIndex": null,
+     "internalIndex": 0,
+     "args": [
+      "CHAT_ACTION_DATA"
+     ],
+     "argsResolved": [
+      "FIXED_DICT"
+     ],
+     "returnValues": []
+    },
+    "onKickedFromServer": {
+     "exposedId": 1,
+     "wireTopIndex": 1,
+     "wireSubIndex": null,
+     "internalIndex": 1,
+     "args": [
+      "STRING",
+      "BOOL",
+      "UINT32"
+     ],
+     "argsResolved": [
+      "STRING",
+      "UNKNOWN",
+      "UINT32"
+     ],
+     "returnValues": []
+    },
+    "onAutoAimVehicleLost": {
+     "exposedId": 2,
+     "wireTopIndex": 2,
+     "wireSubIndex": null,
+     "internalIndex": 2,
+     "args": [
+      "UINT8"
+     ],
+     "argsResolved": [
+      "UINT8"
+     ],
+     "returnValues": []
+    },
+    "updateVehicleHealth": {
+     "exposedId": 3,
+     "wireTopIndex": 3,
+     "wireSubIndex": null,
+     "internalIndex": 3,
+     "args": [
+      "INT16",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "INT16",
+      "UNKNOWN"
+     ],
+     "returnValues": []
+    },
+    "updateVehicleGunReloadTime": {
+     "exposedId": 4,
+     "wireTopIndex": 4,
+     "wireSubIndex": null,
+     "internalIndex": 4,
+     "args": [
+      "FLOAT32"
+     ],
+     "argsResolved": [
+      "FLOAT32"
+     ],
+     "returnValues": []
+    },
+    "updateVehicleAmmo": {
+     "exposedId": 5,
+     "wireTopIndex": 5,
+     "wireSubIndex": null,
+     "internalIndex": 5,
+     "args": [
+      "INT32",
+      "UINT16",
+      "INT16"
+     ],
+     "argsResolved": [
+      "INT32",
+      "UINT16",
+      "INT16"
+     ],
+     "returnValues": []
+    },
+    "updateVehicleSetting": {
+     "exposedId": 6,
+     "wireTopIndex": 6,
+     "wireSubIndex": null,
+     "internalIndex": 6,
+     "args": [
+      "UINT8",
+      "INT32"
+     ],
+     "argsResolved": [
+      "UINT8",
+      "INT32"
+     ],
+     "returnValues": []
+    },
+    "updateTargetingInfo": {
+     "exposedId": 7,
+     "wireTopIndex": 7,
+     "wireSubIndex": null,
+     "internalIndex": 7,
+     "args": [
+      "FLOAT32",
+      "FLOAT32",
+      "FLOAT32",
+      "FLOAT32",
+      "FLOAT32",
+      "FLOAT32"
+     ],
+     "argsResolved": [
+      "FLOAT32",
+      "FLOAT32",
+      "FLOAT32",
+      "FLOAT32",
+      "FLOAT32",
+      "FLOAT32"
+     ],
+     "returnValues": []
+    },
+    "updateGunMarker": {
+     "exposedId": 8,
+     "wireTopIndex": 8,
+     "wireSubIndex": null,
+     "internalIndex": 8,
+     "args": [
+      "VECTOR3",
+      "VECTOR3",
+      "FLOAT32"
+     ],
+     "argsResolved": [
+      "VECTOR3",
+      "VECTOR3",
+      "FLOAT32"
+     ],
+     "returnValues": []
+    },
+    "updateOwnVehiclePosition": {
+     "exposedId": 9,
+     "wireTopIndex": 9,
+     "wireSubIndex": null,
+     "internalIndex": 9,
+     "args": [
+      "VECTOR3",
+      "VECTOR3",
+      "FLOAT32",
+      "FLOAT32"
+     ],
+     "argsResolved": [
+      "VECTOR3",
+      "VECTOR3",
+      "FLOAT32",
+      "FLOAT32"
+     ],
+     "returnValues": []
+    },
+    "showVehicleDamageInfo": {
+     "exposedId": 10,
+     "wireTopIndex": 10,
+     "wireSubIndex": null,
+     "internalIndex": 10,
+     "args": [
+      "UINT8",
+      "EXTRA_ID",
+      "OBJECT_ID"
+     ],
+     "argsResolved": [
+      "UINT8",
+      "UNKNOWN",
+      "OBJECT_ID"
+     ],
+     "returnValues": []
+    },
+    "showDevelopmentInfo": {
+     "exposedId": 11,
+     "wireTopIndex": 11,
+     "wireSubIndex": null,
+     "internalIndex": 11,
+     "args": [
+      "UINT8",
+      "STRING"
+     ],
+     "argsResolved": [
+      "UINT8",
+      "STRING"
+     ],
+     "returnValues": []
+    },
+    "showTracer": {
+     "exposedId": 12,
+     "wireTopIndex": 12,
+     "wireSubIndex": null,
+     "internalIndex": 12,
+     "args": [
+      "OBJECT_ID",
+      "SHOT_ID",
+      "UINT8",
+      "VECTOR3",
+      "VECTOR3",
+      "FLOAT32"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "UNKNOWN",
+      "UINT8",
+      "VECTOR3",
+      "VECTOR3",
+      "FLOAT32"
+     ],
+     "returnValues": []
+    },
+    "stopTracer": {
+     "exposedId": 13,
+     "wireTopIndex": 13,
+     "wireSubIndex": null,
+     "internalIndex": 13,
+     "args": [
+      "SHOT_ID",
+      "VECTOR3"
+     ],
+     "argsResolved": [
+      "UNKNOWN",
+      "VECTOR3"
+     ],
+     "returnValues": []
+    },
+    "explodeProjectile": {
+     "exposedId": 14,
+     "wireTopIndex": 14,
+     "wireSubIndex": null,
+     "internalIndex": 14,
+     "args": [
+      "SHOT_ID",
+      "UINT8",
+      "UINT8",
+      "VECTOR3",
+      "VECTOR3"
+     ],
+     "argsResolved": [
+      "UNKNOWN",
+      "UINT8",
+      "UINT8",
+      "VECTOR3",
+      "VECTOR3"
+     ],
+     "returnValues": []
+    },
+    "receiveHorn": {
+     "exposedId": 15,
+     "wireTopIndex": 15,
+     "wireSubIndex": null,
+     "internalIndex": 15,
+     "args": [
+      "OBJECT_ID",
+      "UINT8",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "UINT8",
+      "UNKNOWN"
+     ],
+     "returnValues": []
+    },
+    "onKickedFromArena": {
+     "exposedId": 16,
+     "wireTopIndex": 16,
+     "wireSubIndex": null,
+     "internalIndex": 16,
+     "args": [
+      "UINT8"
+     ],
+     "argsResolved": [
+      "UINT8"
+     ],
+     "returnValues": []
+    },
+    "onVehicleLeftArena": {
+     "exposedId": 17,
+     "wireTopIndex": 17,
+     "wireSubIndex": null,
+     "internalIndex": 17,
+     "args": [
+      "BOOL",
+      "INT32",
+      "BATTLE_RESULTS_EXT"
+     ],
+     "argsResolved": [
+      "UNKNOWN",
+      "INT32",
+      "FIXED_DICT"
+     ],
+     "returnValues": []
+    },
+    "updateArena": {
+     "exposedId": 18,
+     "wireTopIndex": 18,
+     "wireSubIndex": null,
+     "internalIndex": 18,
+     "args": [
+      "UINT8",
+      "STRING"
+     ],
+     "argsResolved": [
+      "UINT8",
+      "STRING"
+     ],
+     "returnValues": []
+    },
+    "updatePositions": {
+     "exposedId": 19,
+     "wireTopIndex": 19,
+     "wireSubIndex": null,
+     "internalIndex": 19,
+     "args": [
+      "ARRAY<of>UINT8</of>",
+      "ARRAY<of>INT16</of>"
+     ],
+     "argsResolved": [
+      "ARRAY",
+      "ARRAY"
+     ],
+     "returnValues": []
+    }
+   },
+   "baseMethodSlots": {
+    "onVOIPCredentialsReceived": {
+     "internalIndex": 0,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "STRING"
+     ],
+     "argsResolved": [
+      "STRING",
+      "STRING"
+     ]
+    },
+    "joinChatChannel": {
+     "internalIndex": 1,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "STRING"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "STRING"
+     ]
+    },
+    "leaveChatChannel": {
+     "internalIndex": 2,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID"
+     ],
+     "argsResolved": [
+      "OBJECT_ID"
+     ]
+    },
+    "onChatAction": {
+     "internalIndex": 3,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "CHAT_ACTION_DATA"
+     ],
+     "argsResolved": [
+      "FIXED_DICT"
+     ]
+    },
+    "chatCommand": {
+     "internalIndex": 4,
+     "exposed": true,
+     "exposedId": 0,
+     "args": [
+      "INT64",
+      "UINT8",
+      "OBJECT_ID",
+      "INT64",
+      "INT16",
+      "STRING",
+      "STRING",
+      "MAILBOX"
+     ],
+     "argsResolved": [
+      "INT64",
+      "UINT8",
+      "OBJECT_ID",
+      "INT64",
+      "INT16",
+      "STRING",
+      "STRING",
+      "MAILBOX"
+     ]
+    },
+    "inviteCommand": {
+     "internalIndex": 5,
+     "exposed": true,
+     "exposedId": 1,
+     "args": [
+      "INT64",
+      "UINT8",
+      "INT8",
+      "STRING",
+      "INT64",
+      "INT16",
+      "STRING",
+      "STRING"
+     ],
+     "argsResolved": [
+      "INT64",
+      "UINT8",
+      "INT8",
+      "STRING",
+      "INT64",
+      "INT16",
+      "STRING",
+      "STRING"
+     ]
+    },
+    "ackCommand": {
+     "internalIndex": 6,
+     "exposed": true,
+     "exposedId": 2,
+     "args": [
+      "INT64",
+      "UINT8",
+      "FLOAT64",
+      "INT64",
+      "INT64"
+     ],
+     "argsResolved": [
+      "INT64",
+      "UINT8",
+      "FLOAT64",
+      "INT64",
+      "INT64"
+     ]
+    },
+    "keepAlive": {
+     "internalIndex": 7,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "INT16"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "INT16"
+     ]
+    },
+    "releaseClient": {
+     "internalIndex": 8,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "updateArena": {
+     "internalIndex": 9,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT8",
+      "STRING"
+     ],
+     "argsResolved": [
+      "UINT8",
+      "STRING"
+     ]
+    },
+    "updatePositions": {
+     "internalIndex": 10,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "ARRAY<of>UINT8</of>",
+      "ARRAY<of>INT16</of>"
+     ],
+     "argsResolved": [
+      "ARRAY",
+      "ARRAY"
+     ]
+    },
+    "updateOwnVehiclePosition": {
+     "internalIndex": 11,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "VECTOR3",
+      "VECTOR3",
+      "FLOAT32",
+      "FLOAT32"
+     ],
+     "argsResolved": [
+      "VECTOR3",
+      "VECTOR3",
+      "FLOAT32",
+      "FLOAT32"
+     ]
+    },
+    "updateGunMarker": {
+     "internalIndex": 12,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "VECTOR3",
+      "VECTOR3",
+      "FLOAT32"
+     ],
+     "argsResolved": [
+      "VECTOR3",
+      "VECTOR3",
+      "FLOAT32"
+     ]
+    },
+    "updateVehicleHealth": {
+     "internalIndex": 13,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "INT16",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "INT16",
+      "UNKNOWN"
+     ]
+    },
+    "updateVehicleGunReloadTime": {
+     "internalIndex": 14,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "FLOAT32"
+     ],
+     "argsResolved": [
+      "FLOAT32"
+     ]
+    },
+    "updateVehicleAmmo": {
+     "internalIndex": 15,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "INT32",
+      "UINT16",
+      "INT16"
+     ],
+     "argsResolved": [
+      "INT32",
+      "UINT16",
+      "INT16"
+     ]
+    },
+    "updateVehicleSetting": {
+     "internalIndex": 16,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT8",
+      "INT32"
+     ],
+     "argsResolved": [
+      "UINT8",
+      "INT32"
+     ]
+    },
+    "updateTargetingInfo": {
+     "internalIndex": 17,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "FLOAT32",
+      "FLOAT32",
+      "FLOAT32",
+      "FLOAT32",
+      "FLOAT32",
+      "FLOAT32"
+     ],
+     "argsResolved": [
+      "FLOAT32",
+      "FLOAT32",
+      "FLOAT32",
+      "FLOAT32",
+      "FLOAT32",
+      "FLOAT32"
+     ]
+    },
+    "showVehicleDamageInfo": {
+     "internalIndex": 18,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT8",
+      "EXTRA_ID",
+      "OBJECT_ID"
+     ],
+     "argsResolved": [
+      "UINT8",
+      "UNKNOWN",
+      "OBJECT_ID"
+     ]
+    },
+    "showDevelopmentInfo": {
+     "internalIndex": 19,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT8",
+      "STRING"
+     ],
+     "argsResolved": [
+      "UINT8",
+      "STRING"
+     ]
+    },
+    "vehicle_moveWith": {
+     "internalIndex": 20,
+     "exposed": true,
+     "exposedId": 3,
+     "args": [
+      "UINT8"
+     ],
+     "argsResolved": [
+      "UINT8"
+     ]
+    },
+    "vehicle_shoot": {
+     "internalIndex": 21,
+     "exposed": true,
+     "exposedId": 4,
+     "args": [],
+     "argsResolved": []
+    },
+    "vehicle_trackPointWithGun": {
+     "internalIndex": 22,
+     "exposed": true,
+     "exposedId": 5,
+     "args": [
+      "VECTOR3"
+     ],
+     "argsResolved": [
+      "VECTOR3"
+     ]
+    },
+    "vehicle_stopTrackingWithGun": {
+     "internalIndex": 23,
+     "exposed": true,
+     "exposedId": 6,
+     "args": [
+      "FLOAT32",
+      "FLOAT32"
+     ],
+     "argsResolved": [
+      "FLOAT32",
+      "FLOAT32"
+     ]
+    },
+    "vehicle_changeSetting": {
+     "internalIndex": 24,
+     "exposed": true,
+     "exposedId": 7,
+     "args": [
+      "UINT8",
+      "INT32"
+     ],
+     "argsResolved": [
+      "UINT8",
+      "INT32"
+     ]
+    },
+    "vehicle_teleport": {
+     "internalIndex": 25,
+     "exposed": true,
+     "exposedId": 8,
+     "args": [
+      "VECTOR3",
+      "FLOAT32"
+     ],
+     "argsResolved": [
+      "VECTOR3",
+      "FLOAT32"
+     ]
+    },
+    "vehicle_useHorn": {
+     "internalIndex": 26,
+     "exposed": true,
+     "exposedId": 9,
+     "args": [
+      "BOOL"
+     ],
+     "argsResolved": [
+      "UNKNOWN"
+     ]
+    },
+    "createCellNearHere": {
+     "internalIndex": 27,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX"
+     ],
+     "argsResolved": [
+      "MAILBOX"
+     ]
+    },
+    "onClientReady": {
+     "internalIndex": 28,
+     "exposed": true,
+     "exposedId": 10,
+     "args": [],
+     "argsResolved": []
+    },
+    "setVehicle": {
+     "internalIndex": 29,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX"
+     ],
+     "argsResolved": [
+      "MAILBOX"
+     ]
+    },
+    "leaveArena": {
+     "internalIndex": 30,
+     "exposed": true,
+     "exposedId": 11,
+     "args": [],
+     "argsResolved": []
+    },
+    "smartDestroy": {
+     "internalIndex": 31,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "onKickedFromArena": {
+     "internalIndex": 32,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "UINT16"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "UINT16"
+     ]
+    },
+    "onRoundStarted": {
+     "internalIndex": 33,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "onRoundFinished": {
+     "internalIndex": 34,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "onVehicleLeftArena": {
+     "internalIndex": 35,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "BOOL",
+      "INT32",
+      "BATTLE_RESULTS_EXT"
+     ],
+     "argsResolved": [
+      "UNKNOWN",
+      "INT32",
+      "FIXED_DICT"
+     ]
+    },
+    "setDevelopmentFeature": {
+     "internalIndex": 36,
+     "exposed": true,
+     "exposedId": 12,
+     "args": [
+      "STRING",
+      "INT32"
+     ],
+     "argsResolved": [
+      "STRING",
+      "INT32"
+     ]
+    },
+    "addBotToArena": {
+     "internalIndex": 37,
+     "exposed": true,
+     "exposedId": 13,
+     "args": [
+      "STRING",
+      "UINT8",
+      "STRING"
+     ],
+     "argsResolved": [
+      "STRING",
+      "UINT8",
+      "STRING"
+     ]
+    },
+    "controlAnotherVehicle": {
+     "internalIndex": 38,
+     "exposed": true,
+     "exposedId": 14,
+     "args": [
+      "OBJECT_ID",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "UINT8"
+     ]
+    },
+    "receiveFakeShot": {
+     "internalIndex": 39,
+     "exposed": true,
+     "exposedId": 15,
+     "args": [
+      "INT32",
+      "FLOAT32",
+      "VECTOR3",
+      "VECTOR3",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "INT32",
+      "FLOAT32",
+      "VECTOR3",
+      "VECTOR3",
+      "UINT8"
+     ]
+    }
+   },
+   "exposedBaseMethodIds": {
+    "chatCommand": {
+     "exposedId": 0,
+     "args": [
+      "INT64",
+      "UINT8",
+      "OBJECT_ID",
+      "INT64",
+      "INT16",
+      "STRING",
+      "STRING",
+      "MAILBOX"
+     ],
+     "argsResolved": [
+      "INT64",
+      "UINT8",
+      "OBJECT_ID",
+      "INT64",
+      "INT16",
+      "STRING",
+      "STRING",
+      "MAILBOX"
+     ],
+     "returnValues": []
+    },
+    "inviteCommand": {
+     "exposedId": 1,
+     "args": [
+      "INT64",
+      "UINT8",
+      "INT8",
+      "STRING",
+      "INT64",
+      "INT16",
+      "STRING",
+      "STRING"
+     ],
+     "argsResolved": [
+      "INT64",
+      "UINT8",
+      "INT8",
+      "STRING",
+      "INT64",
+      "INT16",
+      "STRING",
+      "STRING"
+     ],
+     "returnValues": []
+    },
+    "ackCommand": {
+     "exposedId": 2,
+     "args": [
+      "INT64",
+      "UINT8",
+      "FLOAT64",
+      "INT64",
+      "INT64"
+     ],
+     "argsResolved": [
+      "INT64",
+      "UINT8",
+      "FLOAT64",
+      "INT64",
+      "INT64"
+     ],
+     "returnValues": []
+    },
+    "vehicle_moveWith": {
+     "exposedId": 3,
+     "args": [
+      "UINT8"
+     ],
+     "argsResolved": [
+      "UINT8"
+     ],
+     "returnValues": []
+    },
+    "vehicle_shoot": {
+     "exposedId": 4,
+     "args": [],
+     "argsResolved": [],
+     "returnValues": []
+    },
+    "vehicle_trackPointWithGun": {
+     "exposedId": 5,
+     "args": [
+      "VECTOR3"
+     ],
+     "argsResolved": [
+      "VECTOR3"
+     ],
+     "returnValues": []
+    },
+    "vehicle_stopTrackingWithGun": {
+     "exposedId": 6,
+     "args": [
+      "FLOAT32",
+      "FLOAT32"
+     ],
+     "argsResolved": [
+      "FLOAT32",
+      "FLOAT32"
+     ],
+     "returnValues": []
+    },
+    "vehicle_changeSetting": {
+     "exposedId": 7,
+     "args": [
+      "UINT8",
+      "INT32"
+     ],
+     "argsResolved": [
+      "UINT8",
+      "INT32"
+     ],
+     "returnValues": []
+    },
+    "vehicle_teleport": {
+     "exposedId": 8,
+     "args": [
+      "VECTOR3",
+      "FLOAT32"
+     ],
+     "argsResolved": [
+      "VECTOR3",
+      "FLOAT32"
+     ],
+     "returnValues": []
+    },
+    "vehicle_useHorn": {
+     "exposedId": 9,
+     "args": [
+      "BOOL"
+     ],
+     "argsResolved": [
+      "UNKNOWN"
+     ],
+     "returnValues": []
+    },
+    "onClientReady": {
+     "exposedId": 10,
+     "args": [],
+     "argsResolved": [],
+     "returnValues": []
+    },
+    "leaveArena": {
+     "exposedId": 11,
+     "args": [],
+     "argsResolved": [],
+     "returnValues": []
+    },
+    "setDevelopmentFeature": {
+     "exposedId": 12,
+     "args": [
+      "STRING",
+      "INT32"
+     ],
+     "argsResolved": [
+      "STRING",
+      "INT32"
+     ],
+     "returnValues": []
+    },
+    "addBotToArena": {
+     "exposedId": 13,
+     "args": [
+      "STRING",
+      "UINT8",
+      "STRING"
+     ],
+     "argsResolved": [
+      "STRING",
+      "UINT8",
+      "STRING"
+     ],
+     "returnValues": []
+    },
+    "controlAnotherVehicle": {
+     "exposedId": 14,
+     "args": [
+      "OBJECT_ID",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "UINT8"
+     ],
+     "returnValues": []
+    },
+    "receiveFakeShot": {
+     "exposedId": 15,
+     "args": [
+      "INT32",
+      "FLOAT32",
+      "VECTOR3",
+      "VECTOR3",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "INT32",
+      "FLOAT32",
+      "VECTOR3",
+      "VECTOR3",
+      "UINT8"
+     ],
+     "returnValues": []
+    }
+   },
+   "exposedCellMethodIds": {
+    "autoAim": {
+     "exposedId": 0,
+     "args": [
+      "OBJECT_ID"
+     ],
+     "argsResolved": [
+      "OBJECT_ID"
+     ]
+    },
+    "moveTo": {
+     "exposedId": 1,
+     "args": [
+      "VECTOR3"
+     ],
+     "argsResolved": [
+      "VECTOR3"
+     ]
+    },
+    "bindToVehicle": {
+     "exposedId": 2,
+     "args": [
+      "OBJECT_ID",
+      "VECTOR3"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "VECTOR3"
+     ]
+    }
+   },
+   "counts": {
+    "properties": 13,
+    "clientServerProperties": 7,
+    "clientMethods": 20,
+    "clientMethodsExposed": 20,
+    "cellMethods": 9,
+    "cellMethodsExposed": 3,
+    "baseMethods": 40,
+    "baseMethodsExposed": 16
+   }
+  },
+  "Admin": {
+   "typeID": 3,
+   "clientMethodIds": {},
+   "baseMethodSlots": {
+    "onAccountKept": {
+     "internalIndex": 0,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "INT32"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "INT32"
+     ]
+    },
+    "onAccountPropertiesChanged": {
+     "internalIndex": 1,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "INT32",
+      "INT32"
+     ],
+     "argsResolved": [
+      "INT32",
+      "INT32"
+     ]
+    },
+    "receiveProperties": {
+     "internalIndex": 2,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "DB_ID",
+      "INT32",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "DB_ID",
+      "INT32",
+      "PYTHON"
+     ]
+    },
+    "onGiftsAdded": {
+     "internalIndex": 3,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "INT32",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "INT32",
+      "PYTHON"
+     ]
+    },
+    "webGetEntityByName": {
+     "internalIndex": 4,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "STRING"
+     ],
+     "argsResolved": [
+      "STRING",
+      "STRING"
+     ]
+    },
+    "webGetEntityByDBID": {
+     "internalIndex": 5,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "DB_ID"
+     ],
+     "argsResolved": [
+      "STRING",
+      "DB_ID"
+     ]
+    },
+    "webSetAccountRestriction": {
+     "internalIndex": 6,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "UINT16",
+      "STRING",
+      "UINT32",
+      "UINT16",
+      "STRING"
+     ],
+     "argsResolved": [
+      "STRING",
+      "UINT16",
+      "STRING",
+      "UINT32",
+      "UINT16",
+      "STRING"
+     ]
+    },
+    "webGetAccountRestrictions": {
+     "internalIndex": 7,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING"
+     ],
+     "argsResolved": [
+      "STRING"
+     ]
+    },
+    "webDelAccountRestriction": {
+     "internalIndex": 8,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "UINT16",
+      "UINT32"
+     ],
+     "argsResolved": [
+      "STRING",
+      "UINT16",
+      "UINT32"
+     ]
+    },
+    "webSetAccountAttr": {
+     "internalIndex": 9,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "UINT64",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "STRING",
+      "UINT64",
+      "UNKNOWN"
+     ]
+    },
+    "webGetAccountAttrs": {
+     "internalIndex": 10,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING"
+     ],
+     "argsResolved": [
+      "STRING"
+     ]
+    },
+    "webSetAccountFinPassword": {
+     "internalIndex": 11,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "STRING",
+      "STRING",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "STRING",
+      "STRING",
+      "STRING",
+      "UNKNOWN"
+     ]
+    },
+    "webSetAccountAutoBanTime": {
+     "internalIndex": 12,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "UINT32"
+     ],
+     "argsResolved": [
+      "STRING",
+      "UINT32"
+     ]
+    },
+    "webSetAccountNextBanLevel": {
+     "internalIndex": 13,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "STRING",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "STRING",
+      "STRING",
+      "UINT8"
+     ]
+    },
+    "webKickAccount": {
+     "internalIndex": 14,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "STRING"
+     ],
+     "argsResolved": [
+      "STRING",
+      "STRING"
+     ]
+    },
+    "webChangeLoginName": {
+     "internalIndex": 15,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "STRING",
+      "STRING",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "STRING",
+      "STRING",
+      "STRING",
+      "UNKNOWN"
+     ]
+    },
+    "webChangePassword": {
+     "internalIndex": 16,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "STRING",
+      "BOOL",
+      "STRING"
+     ],
+     "argsResolved": [
+      "STRING",
+      "STRING",
+      "UNKNOWN",
+      "STRING"
+     ]
+    },
+    "webSetPasswordForLogin": {
+     "internalIndex": 17,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "STRING"
+     ],
+     "argsResolved": [
+      "STRING",
+      "STRING"
+     ]
+    },
+    "webAddGifts": {
+     "internalIndex": 18,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "STRING",
+      "PYTHON"
+     ]
+    },
+    "webWipeAccount": {
+     "internalIndex": 19,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "STRING",
+      "UNKNOWN"
+     ]
+    },
+    "webGetAccountIdentity": {
+     "internalIndex": 20,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "STRING",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "STRING",
+      "STRING",
+      "UNKNOWN"
+     ]
+    },
+    "webAddRebootMessage": {
+     "internalIndex": 21,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "FLOAT64"
+     ],
+     "argsResolved": [
+      "FLOAT64"
+     ]
+    },
+    "webAddAdminTextMessage": {
+     "internalIndex": 22,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "UINT8",
+      "FLOAT64",
+      "FLOAT64"
+     ],
+     "argsResolved": [
+      "STRING",
+      "UINT8",
+      "FLOAT64",
+      "FLOAT64"
+     ]
+    },
+    "webAddInvoice": {
+     "internalIndex": 23,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT16",
+      "UINT64",
+      "UINT16",
+      "UINT64",
+      "UINT16",
+      "UINT64",
+      "INT16",
+      "INT64",
+      "PYTHON",
+      "UINT32",
+      "INT32"
+     ],
+     "argsResolved": [
+      "UINT16",
+      "UINT64",
+      "UINT16",
+      "UINT64",
+      "UINT16",
+      "UINT64",
+      "INT16",
+      "INT64",
+      "PYTHON",
+      "UINT32",
+      "INT32"
+     ]
+    },
+    "webCreatePrebattle": {
+     "internalIndex": 24,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT64",
+      "PYTHON",
+      "UINT32"
+     ],
+     "argsResolved": [
+      "UINT64",
+      "PYTHON",
+      "UINT32"
+     ]
+    },
+    "onMessageSent": {
+     "internalIndex": 25,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT32",
+      "INT32"
+     ],
+     "argsResolved": [
+      "UINT32",
+      "INT32"
+     ]
+    },
+    "onInvoiceAdded": {
+     "internalIndex": 26,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT32",
+      "INT32"
+     ],
+     "argsResolved": [
+      "UINT32",
+      "INT32"
+     ]
+    }
+   },
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 1,
+    "clientServerProperties": 0,
+    "clientMethods": 0,
+    "clientMethodsExposed": 0,
+    "cellMethods": 0,
+    "cellMethodsExposed": 0,
+    "baseMethods": 27,
+    "baseMethodsExposed": 0
+   }
+  },
+  "Arena": {
+   "typeID": 4,
+   "clientMethodIds": {},
+   "baseMethodSlots": {
+    "onAllSpaceGeometryLoaded": {
+     "internalIndex": 0,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "onPrebattleDestroyed": {
+     "internalIndex": 1,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID"
+     ],
+     "argsResolved": [
+      "OBJECT_ID"
+     ]
+    },
+    "onVehicleCreated": {
+     "internalIndex": 2,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID"
+     ],
+     "argsResolved": [
+      "OBJECT_ID"
+     ]
+    },
+    "onCreateVehicleFailure": {
+     "internalIndex": 3,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID"
+     ],
+     "argsResolved": [
+      "OBJECT_ID"
+     ]
+    },
+    "onTeamBaseCaptured": {
+     "internalIndex": 4,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT8"
+     ],
+     "argsResolved": [
+      "UINT8"
+     ]
+    },
+    "onVehicleKilled": {
+     "internalIndex": 5,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "OBJECT_ID",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "OBJECT_ID",
+      "UINT8"
+     ]
+    },
+    "updateCellappID": {
+     "internalIndex": 6,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "INT32"
+     ],
+     "argsResolved": [
+      "INT32"
+     ]
+    },
+    "stopByFailure": {
+     "internalIndex": 7,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "BOOL"
+     ],
+     "argsResolved": [
+      "UNKNOWN"
+     ]
+    },
+    "reuse": {
+     "internalIndex": 8,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT8",
+      "PYTHON",
+      "INT32",
+      "PYTHON",
+      "UINT8",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "UINT8",
+      "PYTHON",
+      "INT32",
+      "PYTHON",
+      "UINT8",
+      "UNKNOWN"
+     ]
+    },
+    "receiveTeamBasePoints": {
+     "internalIndex": 9,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT8",
+      "UINT8",
+      "UINT16"
+     ],
+     "argsResolved": [
+      "UINT8",
+      "UINT8",
+      "UINT16"
+     ]
+    },
+    "receiveVehicleFinalStats": {
+     "internalIndex": 10,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "BATTLE_RESULTS"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "FIXED_DICT"
+     ]
+    },
+    "createCellNearSelf": {
+     "internalIndex": 11,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX"
+     ],
+     "argsResolved": [
+      "MAILBOX"
+     ]
+    },
+    "doFarCall": {
+     "internalIndex": 12,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "STRING",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "STRING",
+      "PYTHON"
+     ]
+    },
+    "addPlayer": {
+     "internalIndex": 13,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "ARENA_ADDPLAYER_INFO"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "FIXED_DICT"
+     ]
+    },
+    "registerAvatar": {
+     "internalIndex": 14,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "MAILBOX"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "MAILBOX"
+     ]
+    },
+    "setAvatarReady": {
+     "internalIndex": 15,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "OBJECT_ID"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "OBJECT_ID"
+     ]
+    },
+    "removeAccount": {
+     "internalIndex": 16,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID"
+     ],
+     "argsResolved": [
+      "OBJECT_ID"
+     ]
+    },
+    "removeAvatar": {
+     "internalIndex": 17,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID"
+     ],
+     "argsResolved": [
+      "OBJECT_ID"
+     ]
+    },
+    "sendArenaStateTo": {
+     "internalIndex": 18,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX"
+     ],
+     "argsResolved": [
+      "MAILBOX"
+     ]
+    },
+    "compressAndSendMinimapPositions": {
+     "internalIndex": 19,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "ARRAY<of>OBJECT_ID</of>",
+      "ARRAY<of>FLOAT32</of>"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "ARRAY",
+      "ARRAY"
+     ]
+    },
+    "setTeamKiller": {
+     "internalIndex": 20,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID"
+     ],
+     "argsResolved": [
+      "OBJECT_ID"
+     ]
+    },
+    "addBot": {
+     "internalIndex": 21,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "UINT8",
+      "STRING"
+     ],
+     "argsResolved": [
+      "STRING",
+      "UINT8",
+      "STRING"
+     ]
+    },
+    "smartDestroy": {
+     "internalIndex": 22,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT8"
+     ],
+     "argsResolved": [
+      "UINT8"
+     ]
+    }
+   },
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 11,
+    "clientServerProperties": 0,
+    "clientMethods": 0,
+    "clientMethodsExposed": 0,
+    "cellMethods": 6,
+    "cellMethodsExposed": 0,
+    "baseMethods": 23,
+    "baseMethodsExposed": 0
+   }
+  },
+  "ArenaMgr": {
+   "typeID": 5,
+   "clientMethodIds": {},
+   "baseMethodSlots": {
+    "onArenaCreated": {
+     "internalIndex": 0,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "UINT64",
+      "PYTHON",
+      "INT32"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "UINT64",
+      "PYTHON",
+      "INT32"
+     ]
+    },
+    "sendActiveArenasTo": {
+     "internalIndex": 1,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX"
+     ],
+     "argsResolved": [
+      "MAILBOX"
+     ]
+    },
+    "createArena": {
+     "internalIndex": 2,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "ARRAY<of>INT16</of>",
+      "UINT8",
+      "PYTHON",
+      "INT32",
+      "PYTHON",
+      "UINT8",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "ARRAY",
+      "UINT8",
+      "PYTHON",
+      "INT32",
+      "PYTHON",
+      "UINT8",
+      "UNKNOWN"
+     ]
+    },
+    "addActiveArena": {
+     "internalIndex": 3,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "UINT64",
+      "PUBLIC_ARENA_INFO",
+      "INT32",
+      "UINT16"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "UINT64",
+      "FIXED_DICT",
+      "INT32",
+      "UINT16"
+     ]
+    },
+    "removeArena": {
+     "internalIndex": 4,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID"
+     ],
+     "argsResolved": [
+      "OBJECT_ID"
+     ]
+    },
+    "addArenaToPool": {
+     "internalIndex": 5,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "INT32",
+      "UINT16"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "INT32",
+      "UINT16"
+     ]
+    },
+    "removeArenaFromPool": {
+     "internalIndex": 6,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "INT32"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "INT32"
+     ]
+    },
+    "updateArenaCellappID": {
+     "internalIndex": 7,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "INT32"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "INT32"
+     ]
+    },
+    "enqueue": {
+     "internalIndex": 8,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "PYTHON",
+      "INT32",
+      "INT32",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "PYTHON",
+      "INT32",
+      "INT32",
+      "UINT8"
+     ]
+    },
+    "dequeue": {
+     "internalIndex": 9,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "UINT8"
+     ]
+    },
+    "createArenaFromQueue": {
+     "internalIndex": 10,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    }
+   },
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 0,
+    "clientServerProperties": 0,
+    "clientMethods": 0,
+    "clientMethodsExposed": 0,
+    "cellMethods": 0,
+    "cellMethodsExposed": 0,
+    "baseMethods": 11,
+    "baseMethodsExposed": 0
+   }
+  },
+  "Vehicle": {
+   "typeID": 6,
+   "clientMethodIds": {
+    "showShooting": {
+     "exposedId": 0,
+     "wireTopIndex": 0,
+     "wireSubIndex": null,
+     "internalIndex": 0,
+     "args": [],
+     "argsResolved": [],
+     "returnValues": []
+    },
+    "showDamageFromShot": {
+     "exposedId": 1,
+     "wireTopIndex": 1,
+     "wireSubIndex": null,
+     "internalIndex": 1,
+     "args": [
+      "OBJECT_ID",
+      "ARRAY<of>UINT64</of>",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "ARRAY",
+      "UINT8"
+     ],
+     "returnValues": []
+    },
+    "showDamageFromExplosion": {
+     "exposedId": 2,
+     "wireTopIndex": 2,
+     "wireSubIndex": null,
+     "internalIndex": 2,
+     "args": [
+      "OBJECT_ID",
+      "VECTOR3",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "VECTOR3",
+      "UINT8"
+     ],
+     "returnValues": []
+    },
+    "showFireStartedMessage": {
+     "exposedId": 3,
+     "wireTopIndex": 3,
+     "wireSubIndex": null,
+     "internalIndex": 3,
+     "args": [
+      "OBJECT_ID"
+     ],
+     "argsResolved": [
+      "OBJECT_ID"
+     ],
+     "returnValues": []
+    },
+    "onPushed": {
+     "exposedId": 4,
+     "wireTopIndex": 4,
+     "wireSubIndex": null,
+     "internalIndex": 4,
+     "args": [
+      "FLOAT32",
+      "FLOAT32"
+     ],
+     "argsResolved": [
+      "FLOAT32",
+      "FLOAT32"
+     ],
+     "returnValues": []
+    }
+   },
+   "baseMethodSlots": {
+    "createCellNearHere": {
+     "internalIndex": 0,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX"
+     ],
+     "argsResolved": [
+      "MAILBOX"
+     ]
+    },
+    "onCreateCellSuccess": {
+     "internalIndex": 1,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "receiveFinalStats": {
+     "internalIndex": 2,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "BATTLE_RESULTS"
+     ],
+     "argsResolved": [
+      "FIXED_DICT"
+     ]
+    },
+    "setAvatar": {
+     "internalIndex": 3,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX"
+     ],
+     "argsResolved": [
+      "MAILBOX"
+     ]
+    },
+    "sendFinalStats": {
+     "internalIndex": 4,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "PYTHON"
+     ]
+    },
+    "smartDestroy": {
+     "internalIndex": 5,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    }
+   },
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {
+    "moveWith": {
+     "exposedId": 0,
+     "args": [
+      "UINT8"
+     ],
+     "argsResolved": [
+      "UINT8"
+     ]
+    },
+    "trackPointWithGun": {
+     "exposedId": 1,
+     "args": [
+      "VECTOR3"
+     ],
+     "argsResolved": [
+      "VECTOR3"
+     ]
+    },
+    "stopTrackingWithGun": {
+     "exposedId": 2,
+     "args": [
+      "FLOAT32",
+      "FLOAT32"
+     ],
+     "argsResolved": [
+      "FLOAT32",
+      "FLOAT32"
+     ]
+    },
+    "changeSetting": {
+     "exposedId": 3,
+     "args": [
+      "UINT8",
+      "INT32"
+     ],
+     "argsResolved": [
+      "UINT8",
+      "INT32"
+     ]
+    },
+    "sendVisibilityDevelopmentInfo": {
+     "exposedId": 4,
+     "args": [
+      "OBJECT_ID",
+      "VECTOR3"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "VECTOR3"
+     ]
+    }
+   },
+   "counts": {
+    "properties": 25,
+    "clientServerProperties": 6,
+    "clientMethods": 5,
+    "clientMethodsExposed": 5,
+    "cellMethods": 27,
+    "cellMethodsExposed": 5,
+    "baseMethods": 6,
+    "baseMethodsExposed": 0
+   }
+  },
+  "Projectile": {
+   "typeID": 7,
+   "clientMethodIds": {},
+   "baseMethodSlots": {},
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 3,
+    "clientServerProperties": 0,
+    "clientMethods": 0,
+    "clientMethodsExposed": 0,
+    "cellMethods": 0,
+    "cellMethodsExposed": 0,
+    "baseMethods": 0,
+    "baseMethodsExposed": 0
+   }
+  },
+  "AreaDestructibles": {
+   "typeID": 8,
+   "clientMethodIds": {},
+   "baseMethodSlots": {
+    "createCellNearHere": {
+     "internalIndex": 0,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX"
+     ],
+     "argsResolved": [
+      "MAILBOX"
+     ]
+    },
+    "reset": {
+     "internalIndex": 1,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "smartDestroy": {
+     "internalIndex": 2,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    }
+   },
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 6,
+    "clientServerProperties": 3,
+    "clientMethods": 0,
+    "clientMethodsExposed": 0,
+    "cellMethods": 2,
+    "cellMethodsExposed": 0,
+    "baseMethods": 3,
+    "baseMethodsExposed": 0
+   }
+  },
+  "TeamBase": {
+   "typeID": 9,
+   "clientMethodIds": {},
+   "baseMethodSlots": {
+    "createCellNearHere": {
+     "internalIndex": 0,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX"
+     ],
+     "argsResolved": [
+      "MAILBOX"
+     ]
+    },
+    "smartDestroy": {
+     "internalIndex": 1,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    }
+   },
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 7,
+    "clientServerProperties": 0,
+    "clientMethods": 0,
+    "clientMethodsExposed": 0,
+    "cellMethods": 2,
+    "cellMethodsExposed": 0,
+    "baseMethods": 2,
+    "baseMethodsExposed": 0
+   }
+  },
+  "ChatChannel": {
+   "typeID": 10,
+   "clientMethodIds": {},
+   "baseMethodSlots": {
+    "onAccountKept": {
+     "internalIndex": 0,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "INT32"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "INT32"
+     ]
+    },
+    "onAccountPropertiesChanged": {
+     "internalIndex": 1,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "INT32",
+      "INT32"
+     ],
+     "argsResolved": [
+      "INT32",
+      "INT32"
+     ]
+    },
+    "receiveProperties": {
+     "internalIndex": 2,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "DB_ID",
+      "INT32",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "DB_ID",
+      "INT32",
+      "PYTHON"
+     ]
+    },
+    "onGiftsAdded": {
+     "internalIndex": 3,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "INT32",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "INT32",
+      "PYTHON"
+     ]
+    },
+    "onVoiceChannelCreated": {
+     "internalIndex": 4,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "STRING"
+     ],
+     "argsResolved": [
+      "STRING",
+      "STRING"
+     ]
+    },
+    "onEntityCreatedFromDB": {
+     "internalIndex": 5,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "requestMembers": {
+     "internalIndex": 6,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "UINT8"
+     ]
+    },
+    "requestMessageHistory": {
+     "internalIndex": 7,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "UINT8"
+     ]
+    },
+    "broadcast": {
+     "internalIndex": 8,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "UINT8",
+      "STRING"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "UINT8",
+      "STRING"
+     ]
+    },
+    "enter": {
+     "internalIndex": 9,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "STRING",
+      "UINT8",
+      "MAILBOX",
+      "STRING"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "STRING",
+      "UINT8",
+      "MAILBOX",
+      "STRING"
+     ]
+    },
+    "leave": {
+     "internalIndex": 10,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "UNKNOWN"
+     ]
+    },
+    "destroyChannel": {
+     "internalIndex": 11,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "UNKNOWN"
+     ]
+    },
+    "keepAliveAck": {
+     "internalIndex": 12,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "INT16"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "INT16"
+     ]
+    },
+    "execCommand": {
+     "internalIndex": 13,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "STRING",
+      "INT8",
+      "INT64",
+      "INT8",
+      "INT64",
+      "INT16",
+      "STRING",
+      "STRING"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "STRING",
+      "INT8",
+      "INT64",
+      "INT8",
+      "INT64",
+      "INT16",
+      "STRING",
+      "STRING"
+     ]
+    }
+   },
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 14,
+    "clientServerProperties": 0,
+    "clientMethods": 0,
+    "clientMethodsExposed": 0,
+    "cellMethods": 0,
+    "cellMethodsExposed": 0,
+    "baseMethods": 14,
+    "baseMethodsExposed": 0
+   }
+  },
+  "Registrator": {
+   "typeID": 11,
+   "clientMethodIds": {},
+   "baseMethodSlots": {
+    "onTransactionMessage": {
+     "internalIndex": 0,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "UINT8",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "UINT8",
+      "PYTHON"
+     ]
+    },
+    "webIsLoginExists": {
+     "internalIndex": 1,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING"
+     ],
+     "argsResolved": [
+      "STRING"
+     ]
+    },
+    "webIsNickExists": {
+     "internalIndex": 2,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING"
+     ],
+     "argsResolved": [
+      "STRING"
+     ]
+    },
+    "webRegister": {
+     "internalIndex": 3,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "STRING",
+      "STRING",
+      "STRING",
+      "UINT8",
+      "UINT64",
+      "UINT32",
+      "UINT32",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "STRING",
+      "STRING",
+      "STRING",
+      "STRING",
+      "UINT8",
+      "UINT64",
+      "UINT32",
+      "UINT32",
+      "UINT8"
+     ]
+    }
+   },
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 2,
+    "clientServerProperties": 0,
+    "clientMethods": 0,
+    "clientMethodsExposed": 0,
+    "cellMethods": 0,
+    "cellMethodsExposed": 0,
+    "baseMethods": 4,
+    "baseMethodsExposed": 0
+   }
+  },
+  "OfflineEntity": {
+   "typeID": 12,
+   "clientMethodIds": {},
+   "baseMethodSlots": {},
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 0,
+    "clientServerProperties": 0,
+    "clientMethods": 0,
+    "clientMethodsExposed": 0,
+    "cellMethods": 0,
+    "cellMethodsExposed": 0,
+    "baseMethods": 0,
+    "baseMethodsExposed": 0
+   }
+  },
+  "SysMessenger": {
+   "typeID": 13,
+   "clientMethodIds": {},
+   "baseMethodSlots": {
+    "incChatChannelCounter": {
+     "internalIndex": 0,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID"
+     ],
+     "argsResolved": [
+      "DB_ID"
+     ]
+    },
+    "decChatChannelCounter": {
+     "internalIndex": 1,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID"
+     ],
+     "argsResolved": [
+      "DB_ID"
+     ]
+    },
+    "register": {
+     "internalIndex": 2,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "MAILBOX"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "MAILBOX"
+     ]
+    },
+    "deregister": {
+     "internalIndex": 3,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID"
+     ],
+     "argsResolved": [
+      "DB_ID"
+     ]
+    },
+    "addUserSystemMessage": {
+     "internalIndex": 4,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "UINT8",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "UINT8",
+      "PYTHON"
+     ]
+    },
+    "addAccountNameChangedMessage": {
+     "internalIndex": 5,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "STRING"
+     ],
+     "argsResolved": [
+      "STRING",
+      "STRING"
+     ]
+    },
+    "webAddRebootMessage": {
+     "internalIndex": 6,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "UINT32",
+      "FLOAT64"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "UINT32",
+      "FLOAT64"
+     ]
+    },
+    "webAddAdminTextMessage": {
+     "internalIndex": 7,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "UINT32",
+      "STRING",
+      "UINT8",
+      "FLOAT64",
+      "FLOAT64"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "UINT32",
+      "STRING",
+      "UINT8",
+      "FLOAT64",
+      "FLOAT64"
+     ]
+    }
+   },
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 3,
+    "clientServerProperties": 0,
+    "clientMethods": 0,
+    "clientMethodsExposed": 0,
+    "cellMethods": 0,
+    "cellMethodsExposed": 0,
+    "baseMethods": 8,
+    "baseMethodsExposed": 0
+   }
+  },
+  "InviteManager": {
+   "typeID": 14,
+   "clientMethodIds": {},
+   "baseMethodSlots": {
+    "register": {
+     "internalIndex": 0,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "MAILBOX"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "MAILBOX"
+     ]
+    },
+    "deregister": {
+     "internalIndex": 1,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID"
+     ],
+     "argsResolved": [
+      "DB_ID"
+     ]
+    },
+    "createPrebattleInvite": {
+     "internalIndex": 2,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "STRING",
+      "INT64",
+      "DB_ID",
+      "STRING",
+      "OBJECT_ID",
+      "UINT8",
+      "STRING"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "STRING",
+      "INT64",
+      "DB_ID",
+      "STRING",
+      "OBJECT_ID",
+      "UINT8",
+      "STRING"
+     ]
+    }
+   },
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 2,
+    "clientServerProperties": 0,
+    "clientMethods": 0,
+    "clientMethodsExposed": 0,
+    "cellMethods": 0,
+    "cellMethodsExposed": 0,
+    "baseMethods": 3,
+    "baseMethodsExposed": 0
+   }
+  },
+  "BaseAppChatManager": {
+   "typeID": 15,
+   "clientMethodIds": {},
+   "baseMethodSlots": {
+    "receiveMemebersDelta": {
+     "internalIndex": 0,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT8",
+      "OBJECT_ID",
+      "ARRAY<of>INT32</of>"
+     ],
+     "argsResolved": [
+      "UINT8",
+      "OBJECT_ID",
+      "ARRAY"
+     ]
+    },
+    "relayCommand": {
+     "internalIndex": 1,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT8",
+      "OBJECT_ID",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "UINT8",
+      "OBJECT_ID",
+      "PYTHON"
+     ]
+    }
+   },
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 0,
+    "clientServerProperties": 0,
+    "clientMethods": 0,
+    "clientMethodsExposed": 0,
+    "cellMethods": 0,
+    "cellMethodsExposed": 0,
+    "baseMethods": 2,
+    "baseMethodsExposed": 0
+   }
+  },
+  "Clan": {
+   "typeID": 16,
+   "clientMethodIds": {},
+   "baseMethodSlots": {
+    "onTransactionMessage": {
+     "internalIndex": 0,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "UINT8",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "UINT8",
+      "PYTHON"
+     ]
+    },
+    "keepAlive": {
+     "internalIndex": 1,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT16",
+      "MAILBOX",
+      "INT32"
+     ],
+     "argsResolved": [
+      "UINT16",
+      "MAILBOX",
+      "INT32"
+     ]
+    },
+    "processInvoices": {
+     "internalIndex": 2,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "exportToWeb": {
+     "internalIndex": 3,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "sendMemberInfoTo": {
+     "internalIndex": 4,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "DB_ID"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "DB_ID"
+     ]
+    },
+    "sendPropertiesTo": {
+     "internalIndex": 5,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "ARRAY<of>STRING</of>"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "ARRAY"
+     ]
+    },
+    "receiveProperties": {
+     "internalIndex": 6,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "DB_ID",
+      "INT32",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "DB_ID",
+      "INT32",
+      "PYTHON"
+     ]
+    },
+    "onClanCmdResponse": {
+     "internalIndex": 7,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "INT32",
+      "STRING"
+     ],
+     "argsResolved": [
+      "INT32",
+      "STRING"
+     ]
+    },
+    "onChatChannelCreated": {
+     "internalIndex": 8,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID"
+     ],
+     "argsResolved": [
+      "DB_ID"
+     ]
+    },
+    "broadcastToOnlineMembers": {
+     "internalIndex": 9,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "STRING",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "STRING",
+      "PYTHON"
+     ]
+    },
+    "broadcastSystemMessage": {
+     "internalIndex": 10,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "UINT8",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "UINT8",
+      "PYTHON"
+     ]
+    },
+    "setMemberLanguage": {
+     "internalIndex": 11,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "STRING"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "STRING"
+     ]
+    },
+    "webAddMember": {
+     "internalIndex": 12,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "DB_ID"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "DB_ID"
+     ]
+    },
+    "webRemoveMember": {
+     "internalIndex": 13,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "DB_ID"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "DB_ID"
+     ]
+    },
+    "webSetDescriptionAndMotto": {
+     "internalIndex": 14,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "UINT8",
+      "STRING",
+      "STRING"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "UINT8",
+      "STRING",
+      "STRING"
+     ]
+    },
+    "webSetMemberFlags": {
+     "internalIndex": 15,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "DB_ID",
+      "INT32"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "DB_ID",
+      "INT32"
+     ]
+    },
+    "webSendGold": {
+     "internalIndex": 16,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "DB_ID",
+      "INT32"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "DB_ID",
+      "INT32"
+     ]
+    }
+   },
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 10,
+    "clientServerProperties": 0,
+    "clientMethods": 0,
+    "clientMethodsExposed": 0,
+    "cellMethods": 0,
+    "cellMethodsExposed": 0,
+    "baseMethods": 17,
+    "baseMethodsExposed": 0
+   }
+  },
+  "Node": {
+   "typeID": 17,
+   "clientMethodIds": {},
+   "baseMethodSlots": {
+    "sync": {
+     "internalIndex": 0,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "PYTHON"
+     ]
+    },
+    "onBroadcastMessage": {
+     "internalIndex": 1,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "STRING",
+      "PYTHON"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "STRING",
+      "PYTHON"
+     ]
+    },
+    "addPrebattle": {
+     "internalIndex": 2,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "PYTHON",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "PYTHON",
+      "UNKNOWN"
+     ]
+    },
+    "removePrebattle": {
+     "internalIndex": 3,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "UNKNOWN"
+     ]
+    },
+    "updatePrebattleInfo": {
+     "internalIndex": 4,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "UINT8",
+      "PYTHON",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "UINT8",
+      "PYTHON",
+      "UNKNOWN"
+     ]
+    }
+   },
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 1,
+    "clientServerProperties": 0,
+    "clientMethods": 0,
+    "clientMethodsExposed": 0,
+    "cellMethods": 0,
+    "cellMethodsExposed": 0,
+    "baseMethods": 5,
+    "baseMethodsExposed": 0
+   }
+  },
+  "Prebattle": {
+   "typeID": 18,
+   "clientMethodIds": {},
+   "baseMethodSlots": {
+    "onEnqueued": {
+     "internalIndex": 0,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "onDequeued": {
+     "internalIndex": 1,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "onKickedFromQueue": {
+     "internalIndex": 2,
+     "exposed": false,
+     "exposedId": null,
+     "args": [],
+     "argsResolved": []
+    },
+    "onArenaCreated": {
+     "internalIndex": 3,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "UINT64",
+      "OBJECT_ID",
+      "UINT8",
+      "INT32"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "UINT64",
+      "OBJECT_ID",
+      "UINT8",
+      "INT32"
+     ]
+    },
+    "onArenaFinished": {
+     "internalIndex": 4,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "PREBATTLE_RESULTS"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "FIXED_DICT"
+     ]
+    },
+    "onClanKept": {
+     "internalIndex": 5,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "DB_ID",
+      "OBJECT_ID",
+      "INT32"
+     ],
+     "argsResolved": [
+      "DB_ID",
+      "OBJECT_ID",
+      "INT32"
+     ]
+    },
+    "addPlayer": {
+     "internalIndex": 6,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "STRING",
+      "DB_ID",
+      "STRING",
+      "DB_ID",
+      "STRING"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "STRING",
+      "DB_ID",
+      "STRING",
+      "DB_ID",
+      "STRING"
+     ]
+    },
+    "removePlayer": {
+     "internalIndex": 7,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "INT32",
+      "OBJECT_ID"
+     ],
+     "argsResolved": [
+      "INT32",
+      "OBJECT_ID"
+     ]
+    },
+    "setPlayerNotReady": {
+     "internalIndex": 8,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "INT32",
+      "OBJECT_ID",
+      "UINT16",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "INT32",
+      "OBJECT_ID",
+      "UINT16",
+      "UNKNOWN"
+     ]
+    },
+    "setPlayerReady": {
+     "internalIndex": 9,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "INT32",
+      "OBJECT_ID",
+      "INT32",
+      "STRING",
+      "ARRAY<of>INT32</of>",
+      "ARRAY<of>INT32</of>"
+     ],
+     "argsResolved": [
+      "INT32",
+      "OBJECT_ID",
+      "INT32",
+      "STRING",
+      "ARRAY",
+      "ARRAY"
+     ]
+    },
+    "setPlayerOnline": {
+     "internalIndex": 10,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "OBJECT_ID",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "OBJECT_ID",
+      "UNKNOWN"
+     ]
+    },
+    "kickPlayer": {
+     "internalIndex": 11,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "OBJECT_ID"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "OBJECT_ID"
+     ]
+    },
+    "changePlayerRoster": {
+     "internalIndex": 12,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "OBJECT_ID",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "OBJECT_ID",
+      "UINT8"
+     ]
+    },
+    "changeArenaType": {
+     "internalIndex": 13,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "INT32"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "INT32"
+     ]
+    },
+    "changeRoundLength": {
+     "internalIndex": 14,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "INT32"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "INT32"
+     ]
+    },
+    "changeOpenStatus": {
+     "internalIndex": 15,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "UNKNOWN"
+     ]
+    },
+    "changeComment": {
+     "internalIndex": 16,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "STRING"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "STRING"
+     ]
+    },
+    "changeArenaVoip": {
+     "internalIndex": 17,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "UINT8"
+     ]
+    },
+    "setTeamReady": {
+     "internalIndex": 18,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "UINT8",
+      "BOOL"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "UINT8",
+      "UNKNOWN"
+     ]
+    },
+    "setTeamNotReady": {
+     "internalIndex": 19,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "INT32",
+      "UINT8"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "INT32",
+      "UINT8"
+     ]
+    },
+    "sendPrebattleStateTo": {
+     "internalIndex": 20,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX"
+     ],
+     "argsResolved": [
+      "MAILBOX"
+     ]
+    },
+    "sendRosterTo": {
+     "internalIndex": 21,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX"
+     ],
+     "argsResolved": [
+      "MAILBOX"
+     ]
+    }
+   },
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 3,
+    "clientServerProperties": 0,
+    "clientMethods": 0,
+    "clientMethodsExposed": 0,
+    "cellMethods": 0,
+    "cellMethodsExposed": 0,
+    "baseMethods": 22,
+    "baseMethodsExposed": 0
+   }
+  },
+  "InvoiceManager": {
+   "typeID": 19,
+   "clientMethodIds": {},
+   "baseMethodSlots": {
+    "addInvoice": {
+     "internalIndex": 0,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "UINT32",
+      "UINT16",
+      "UINT64",
+      "UINT16",
+      "UINT64",
+      "UINT16",
+      "UINT64",
+      "INT16",
+      "INT64",
+      "PYTHON",
+      "UINT32",
+      "INT32"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "UINT32",
+      "UINT16",
+      "UINT64",
+      "UINT16",
+      "UINT64",
+      "UINT16",
+      "UINT64",
+      "INT16",
+      "INT64",
+      "PYTHON",
+      "UINT32",
+      "INT32"
+     ]
+    }
+   },
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 0,
+    "clientServerProperties": 0,
+    "clientMethods": 0,
+    "clientMethodsExposed": 0,
+    "cellMethods": 0,
+    "cellMethodsExposed": 0,
+    "baseMethods": 1,
+    "baseMethodsExposed": 0
+   }
+  },
+  "AccountRenamer": {
+   "typeID": 20,
+   "clientMethodIds": {},
+   "baseMethodSlots": {},
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 0,
+    "clientServerProperties": 0,
+    "clientMethods": 0,
+    "clientMethodsExposed": 0,
+    "cellMethods": 0,
+    "cellMethodsExposed": 0,
+    "baseMethods": 0,
+    "baseMethodsExposed": 0
+   }
+  },
+  "VoiceChatMgr": {
+   "typeID": 21,
+   "clientMethodIds": {},
+   "baseMethodSlots": {
+    "registerAccount": {
+     "internalIndex": 0,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX",
+      "STRING",
+      "STRING"
+     ],
+     "argsResolved": [
+      "MAILBOX",
+      "STRING",
+      "STRING"
+     ]
+    },
+    "onVoiceChatCreated": {
+     "internalIndex": 1,
+     "exposed": false,
+     "exposedId": null,
+     "args": [
+      "MAILBOX"
+     ],
+     "argsResolved": [
+      "MAILBOX"
+     ]
+    }
+   },
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 0,
+    "clientServerProperties": 0,
+    "clientMethods": 0,
+    "clientMethodsExposed": 0,
+    "cellMethods": 0,
+    "cellMethodsExposed": 0,
+    "baseMethods": 2,
+    "baseMethodsExposed": 0
+   }
+  },
+  "MessageFilterManager": {
+   "typeID": 22,
+   "clientMethodIds": {},
+   "baseMethodSlots": {},
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 0,
+    "clientServerProperties": 0,
+    "clientMethods": 0,
+    "clientMethodsExposed": 0,
+    "cellMethods": 0,
+    "cellMethodsExposed": 0,
+    "baseMethods": 0,
+    "baseMethodsExposed": 0
+   }
+  },
+  "Flock": {
+   "typeID": 23,
+   "clientMethodIds": {},
+   "baseMethodSlots": {},
+   "exposedBaseMethodIds": {},
+   "exposedCellMethodIds": {},
+   "counts": {
+    "properties": 6,
+    "clientServerProperties": 6,
+    "clientMethods": 0,
+    "clientMethodsExposed": 0,
+    "cellMethods": 0,
+    "cellMethodsExposed": 0,
+    "baseMethods": 0,
+    "baseMethodsExposed": 0
+   }
+  }
+ },
+ "maxExposedClientMethodsPerEntity": 23
+}

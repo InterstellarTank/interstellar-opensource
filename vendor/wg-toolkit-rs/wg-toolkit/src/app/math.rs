@@ -1,0 +1,450 @@
+//! Packed position/direction types used by [`crate::app::client::element`]'s
+//! `AVATAR_UPDATE_*` and `CreateEntity` elements -- lives directly under [`crate::app`]
+//! rather than under `client` since the same packed formats are shared by BigWorld's
+//! wire protocol in general (e.g. [`crate::app::cell::element`]'s own avatar-update
+//! elements), not just the client-facing ones.
+//!
+//! The formulas below are confirmed against the leaked BigWorld 14.4.1 SDK
+//! (`re-work/bigworld-src-14.4.1/programming/bigworld/lib/network/msgtypes.hpp` and its
+//! `msgtypes.ipp` template bodies, plus [`super::bit`] for the underlying MSB-first bit
+//! packing) -- not yet confirmed against a live WoT capture, but this project's own byte
+//! counts for every `AVATAR_UPDATE_*` element (validated earlier against the real
+//! client's handler table) match this source's bit widths exactly, which is strong
+//! indirect confirmation.
+
+use std::io::{self, Read, Write};
+use std::f32::consts::PI;
+
+use glam::Vec3;
+
+use crate::util::io::{WgReadExt, WgWriteExt};
+use crate::net::codec::SimpleCodec;
+
+use super::bit::{BitReader, BitWriter};
+
+
+/// WoT's retuned values for the `msgtypes.hpp` volatile-position bit-allocation macros.
+///
+/// BigWorld ships these as `#define`s (`EXPONENTBITS_XZ`, `XZ_MANTISSABITS_XZ`,
+/// `XYZ_MANTISSABITS_XZ`, `XYZ_EXPONENTBITS_Y`, `XYZ_MANTISSABITS_Y`) whose vanilla
+/// values are 3/8/8/4/11; WG recompiled with different ones, which is why the packed
+/// fields on the wire are wider than the stock engine's.
+///
+/// The values come from the client's inlined `unpackXYZ`/`unpackXZ`: each
+/// `BitReader::get(n)` call states a field's bit count, and the mantissa's `shl`
+/// immediate is `23 - MANTISSA_BITS`, so every field is stated twice and can be checked.
+/// A new client build can change them; that is where to look. The totals, 48 bits for
+/// `PackedXyz` and 24 for `PackedXz`, are exact multiples of 8 as `msgtypes.hpp`'s
+/// `#error Unused bits in ...` guards require, and match the 6- and 3-byte wire widths.
+///
+/// Note `EXPONENT_BITS_XZ` is one macro shared by [`PackedXyz`] and [`PackedXz`], and
+/// the binary does use 4 in both -- an independent consistency check on the reading.
+pub const EXPONENT_BITS_XZ: u32 = 4;
+/// Mantissa bits for `x`/`z` in [`PackedXz`] (vanilla `XZ_MANTISSABITS_XZ` = 8).
+pub const XZ_MANTISSA_BITS_XZ: u32 = 7;
+/// Mantissa bits for `x`/`z` in [`PackedXyz`] (vanilla `XYZ_MANTISSABITS_XZ` = 8).
+pub const XYZ_MANTISSA_BITS_XZ: u32 = 12;
+/// Exponent bits for `y` in [`PackedXyz`] (vanilla `XYZ_EXPONENTBITS_Y` = 4, unchanged).
+pub const XYZ_EXPONENT_BITS_Y: u32 = 4;
+/// Mantissa bits for `y` in [`PackedXyz`] (vanilla `XYZ_MANTISSABITS_Y` = 11).
+pub const XYZ_MANTISSA_BITS_Y: u32 = 9;
+
+
+/// BigWorld's `packFloat<EXPONENT_BITS, MANTISSA_BITS>` (`network/msgtypes.ipp`): packs a
+/// sign bit, then a biased exponent, then a rounded mantissa. The `+2.0` trick on the
+/// absolute value keeps the stored (biased-by-128) exponent non-negative without having
+/// to special-case subnormals -- see [`unpack_float`] for the exact inverse.
+fn pack_float(value: f32, exponent_bits: u32, mantissa_bits: u32, writer: &mut BitWriter) {
+
+    let max_mantissa = (1u32 << mantissa_bits) - 1;
+    let max_exponent = (1u32 << exponent_bits) - 1;
+
+    writer.add(1, value.to_bits() >> 31);
+
+    let bits = (value.abs() + 2.0).to_bits();
+    let mut exponent = (bits >> 23) & 0xFF;
+    debug_assert!(exponent >= 128);
+    exponent -= 128;
+
+    let mantissa_raw = bits & 0x007F_FFFF;
+    let mut mantissa = mantissa_raw >> (23 - mantissa_bits);
+    let next_bit = (mantissa_raw >> (22 - mantissa_bits)) & 1;
+
+    if next_bit == 1 {
+        if mantissa != max_mantissa {
+            mantissa += 1;
+        } else {
+            exponent += 1;
+            mantissa = 0;
+        }
+    }
+
+    if exponent > max_exponent {
+        exponent = max_exponent;
+        mantissa = max_mantissa;
+    }
+
+    writer.add(exponent_bits, exponent);
+    writer.add(mantissa_bits, mantissa);
+
+}
+
+/// Inverse of [`pack_float`].
+fn unpack_float(reader: &mut BitReader, exponent_bits: u32, mantissa_bits: u32) -> f32 {
+    let sign = reader.get(1) << 31;
+    let mut bits = (reader.get(exponent_bits) | 0x80) << 23;
+    bits |= reader.get(mantissa_bits) << (23 - mantissa_bits);
+    let value = f32::from_bits(bits) - 2.0;
+    f32::from_bits(value.to_bits() | sign)
+}
+
+/// BigWorld's `calculateReferencePosition` (`network/msgtypes.hpp`): rounds a position
+/// to whole metres to produce the base that subsequent *relative* volatile updates are
+/// measured from.
+///
+/// The rounding matters. BigWorld's `BW_ROUNDF` is `floorf(value + 0.5f)`
+/// (`lib/math/mathdef.hpp`), i.e. round-**half-up**, and the WoT client inlines exactly
+/// that (`addss 0.5; cvttss2si; step down when negative and inexact`). Rust's
+/// `f32::round` is round-half-*away-from-zero*, which disagrees on negative halves
+/// (`-2.5` gives `-2` here but `-3` there) -- so do not "simplify" this to `.round()`.
+///
+/// The SDK's own justification for rounding at all: if the reference moved by less than
+/// the least-accurate representable offset, entities that are meant to be stationary
+/// would drift as it moved.
+pub fn calculate_reference_position(pos: Vec3) -> Vec3 {
+    Vec3::new(
+        (pos.x + 0.5).floor(),
+        (pos.y + 0.5).floor(),
+        (pos.z + 0.5).floor(),
+    )
+}
+
+/// BigWorld's `angleToInt<8>`/`intToAngle<8>` (`network/msgtypes.ipp`): a full-range
+/// angle in `[-pi, pi)` packed into a single signed byte.
+fn angle_to_i8(angle: f32) -> i8 {
+    ((angle * 128.0 / PI + 0.5).floor() as i32) as i8
+}
+
+fn i8_to_angle(compressed: i8) -> f32 {
+    f32::from(compressed) * (PI / 128.0)
+}
+
+/// BigWorld's `halfAngleToInt<8>`/`intToHalfAngle<8>`: a half-range angle in
+/// `[-pi/2, pi/2)` packed into a single signed byte -- used for pitch wherever
+/// `HALFPITCH` is `true` (BigWorld's default for `PackedYawPitchRoll`).
+fn half_angle_to_i8(angle: f32) -> i8 {
+    ((angle * 254.0 / PI + 0.5).floor().clamp(-128.0, 127.0) as i32) as i8
+}
+
+fn i8_to_half_angle(compressed: i8) -> f32 {
+    f32::from(compressed) * (PI / 254.0)
+}
+
+/// A position packed into 6 bytes (BigWorld's `PackedXYZ`, i.e. `PackedFullPos` with
+/// WoT's retuned template params: 4 exponent + 12 mantissa bits for `x`/`z`, 4 exponent
+/// + 9 mantissa bits for `y`), used by the `FullPos` family of `AVATAR_UPDATE_*`
+/// elements.
+///
+/// Each component is sign + exponent + mantissa, so the field is
+/// `(1+4+12)*2 + (1+4+9)` = 48 bits = 6 bytes, the wire width. The bit counts come from
+/// the client binary; see [`EXPONENT_BITS_XZ`]. The stock engine's 3/8/4/11 split would
+/// be 40 bits = 5 bytes, so decoding with vanilla values yields garbage.
+///
+/// `CreateEntity` doesn't use this compressed form -- its own position is a plain
+/// unpacked [`Vec3`].
+#[derive(Debug, Clone, Copy)]
+pub struct PackedXyz(pub [u8; 6]);
+
+impl PackedXyz {
+
+    /// Decode into `(x, y, z)`: an **offset** from the entity's reference position, not a
+    /// world coordinate. `x`/`z` are in metres once scaled by `xz_scale` (the space's
+    /// `CreateCellPlayer::packed_xz_scale`); `y` is unscaled -- that, and only that, is
+    /// what `msgtypes.hpp`'s "Y-values in off-Ground updates are always absolute" means.
+    ///
+    /// All three components still need the reference position added:
+    /// `AVATAR_UPDATE_GET_POS_FullPos` ends in `pos += originPos`, where `originPos` is
+    /// the connection's reference position, or the zero vector when the entity is riding
+    /// a vehicle (positions are then vehicle-relative). The WoT client does exactly this
+    /// -- three `addss`es against its `referencePosition_`. So do not treat `y` as a
+    /// finished altitude just because it escaped the scale.
+    ///
+    /// The proxy's `PositionTracker` maintains that reference from
+    /// [`RelativePositionReference`]/[`RelativePosition`] and the detailed-position
+    /// messages; see [`calculate_reference_position`].
+    ///
+    /// [`RelativePositionReference`]: crate::app::client::element::RelativePositionReference
+    /// [`RelativePosition`]: crate::app::client::element::RelativePosition
+    pub fn unpack(&self, xz_scale: f32) -> Vec3 {
+        let mut reader = BitReader::new(&self.0);
+        let x = unpack_float(&mut reader, EXPONENT_BITS_XZ, XYZ_MANTISSA_BITS_XZ) * xz_scale;
+        let z = unpack_float(&mut reader, EXPONENT_BITS_XZ, XYZ_MANTISSA_BITS_XZ) * xz_scale;
+        let y = unpack_float(&mut reader, XYZ_EXPONENT_BITS_Y, XYZ_MANTISSA_BITS_Y);
+        Vec3::new(x, y, z)
+    }
+
+    /// Inverse of [`Self::unpack`]: `offset.x`/`offset.z` are offsets from the reference
+    /// position (divided by `xz_scale` before packing), `offset.y` is absolute.
+    pub fn pack(offset: Vec3, xz_scale: f32) -> Self {
+        let mut data = [0u8; 6];
+        let mut writer = BitWriter::new(&mut data);
+        pack_float(offset.x / xz_scale, EXPONENT_BITS_XZ, XYZ_MANTISSA_BITS_XZ, &mut writer);
+        pack_float(offset.z / xz_scale, EXPONENT_BITS_XZ, XYZ_MANTISSA_BITS_XZ, &mut writer);
+        pack_float(offset.y, XYZ_EXPONENT_BITS_Y, XYZ_MANTISSA_BITS_Y, &mut writer);
+        Self(data)
+    }
+
+}
+
+impl SimpleCodec for PackedXyz {
+    fn write(&self, write: &mut dyn Write) -> io::Result<()> {
+        write.write_all(&self.0)
+    }
+    fn read(read: &mut dyn Read) -> io::Result<Self> {
+        let mut data = [0; 6];
+        read.read_exact(&mut data)?;
+        Ok(Self(data))
+    }
+}
+
+/// A ground-relative position packed into 3 bytes (BigWorld's `PackedXZ`, i.e.
+/// `PackedGroundPos` with WoT's retuned template params: 4 exponent + 7 mantissa bits),
+/// used by the `OnGround` family of `AVATAR_UPDATE_*` elements -- only the horizontal
+/// offset is sent on the wire, `y` is assumed to come from the terrain at that point.
+///
+/// `(1+4+7)*2` = 24 bits = 3 bytes. Note this is *not* the same split as [`PackedXyz`]'s
+/// `x`/`z` (which have 12 mantissa bits): the engine keeps two separate mantissa macros
+/// and WG set them differently, so the shared 3-byte width is the only thing these two
+/// have in common. The stock 3/8 split also sums to 3 bytes, which is why this decoded
+/// to plausible-looking but wrong offsets rather than failing outright -- see
+/// [`EXPONENT_BITS_XZ`] for provenance.
+#[derive(Debug, Clone, Copy)]
+pub struct PackedXz(pub [u8; 3]);
+
+impl PackedXz {
+
+    /// Decode into `(dx, dz)`, offsets in metres from the entity's tracked reference
+    /// position scaled by `xz_scale` -- see [`PackedXyz::unpack`].
+    pub fn unpack(&self, xz_scale: f32) -> (f32, f32) {
+        let mut reader = BitReader::new(&self.0);
+        let x = unpack_float(&mut reader, EXPONENT_BITS_XZ, XZ_MANTISSA_BITS_XZ) * xz_scale;
+        let z = unpack_float(&mut reader, EXPONENT_BITS_XZ, XZ_MANTISSA_BITS_XZ) * xz_scale;
+        (x, z)
+    }
+
+    /// Inverse of [`Self::unpack`].
+    pub fn pack(dx: f32, dz: f32, xz_scale: f32) -> Self {
+        let mut data = [0u8; 3];
+        let mut writer = BitWriter::new(&mut data);
+        pack_float(dx / xz_scale, EXPONENT_BITS_XZ, XZ_MANTISSA_BITS_XZ, &mut writer);
+        pack_float(dz / xz_scale, EXPONENT_BITS_XZ, XZ_MANTISSA_BITS_XZ, &mut writer);
+        Self(data)
+    }
+
+}
+
+impl SimpleCodec for PackedXz {
+    fn write(&self, write: &mut dyn Write) -> io::Result<()> {
+        write.write_all(&self.0)
+    }
+    fn read(read: &mut dyn Read) -> io::Result<Self> {
+        let mut data = [0; 3];
+        read.read_exact(&mut data)?;
+        Ok(Self(data))
+    }
+}
+
+/// Yaw, pitch and roll each packed into one byte (BigWorld's compressed `Angle`
+/// encoding, one byte per component since `YAWBITS`/`PITCHBITS`/`ROLLBITS` all default
+/// to 8). Also reused, with `half_pitch = false`, by `CreateEntity::direction`.
+#[derive(Debug, Clone, Copy)]
+pub struct PackedYawPitchRoll(pub [u8; 3]);
+
+impl PackedYawPitchRoll {
+
+    /// Decode into `(yaw, pitch, roll)` radians. `half_pitch` selects whether pitch was
+    /// packed over `[-pi/2, pi/2)` (`true`, BigWorld's default `YAWPITCHROLL_HALFPITCH`,
+    /// used by the `AVATAR_UPDATE_*_YAW_PITCH_ROLL` messages) or the full `[-pi, pi)`
+    /// range (`false`, confirmed used by `ServerConnection::createEntity`'s explicit
+    /// `PackedYawPitchRoll</* HALFPITCH */ false>`, see `CreateEntity`).
+    pub fn unpack(&self, half_pitch: bool) -> (f32, f32, f32) {
+        let yaw = i8_to_angle(self.0[0] as i8);
+        let pitch = if half_pitch { i8_to_half_angle(self.0[1] as i8) } else { i8_to_angle(self.0[1] as i8) };
+        let roll = i8_to_angle(self.0[2] as i8);
+        (yaw, pitch, roll)
+    }
+
+    /// Inverse of [`Self::unpack`].
+    pub fn pack(yaw: f32, pitch: f32, roll: f32, half_pitch: bool) -> Self {
+        let pitch = if half_pitch { half_angle_to_i8(pitch) } else { angle_to_i8(pitch) };
+        Self([angle_to_i8(yaw) as u8, pitch as u8, angle_to_i8(roll) as u8])
+    }
+
+}
+
+impl SimpleCodec for PackedYawPitchRoll {
+    fn write(&self, write: &mut dyn Write) -> io::Result<()> {
+        write.write_all(&self.0)
+    }
+    fn read(read: &mut dyn Read) -> io::Result<Self> {
+        let mut data = [0; 3];
+        read.read_exact(&mut data)?;
+        Ok(Self(data))
+    }
+}
+
+/// Yaw and pitch each packed into one byte, both full-range (`YAWPITCH_HALFPITCH` is
+/// `false`, unlike [`PackedYawPitchRoll`]'s default), see [`PackedYawPitchRoll`].
+#[derive(Debug, Clone, Copy)]
+pub struct PackedYawPitch(pub [u8; 2]);
+
+impl PackedYawPitch {
+
+    /// Decode into `(yaw, pitch)` radians.
+    pub fn unpack(&self) -> (f32, f32) {
+        (i8_to_angle(self.0[0] as i8), i8_to_angle(self.0[1] as i8))
+    }
+
+    /// Inverse of [`Self::unpack`].
+    pub fn pack(yaw: f32, pitch: f32) -> Self {
+        Self([angle_to_i8(yaw) as u8, angle_to_i8(pitch) as u8])
+    }
+
+}
+
+impl SimpleCodec for PackedYawPitch {
+    fn write(&self, write: &mut dyn Write) -> io::Result<()> {
+        write.write_all(&self.0)
+    }
+    fn read(read: &mut dyn Read) -> io::Result<Self> {
+        let mut data = [0; 2];
+        read.read_exact(&mut data)?;
+        Ok(Self(data))
+    }
+}
+
+/// Yaw packed into one byte, full-range, see [`PackedYawPitchRoll`].
+#[derive(Debug, Clone, Copy)]
+pub struct PackedYaw(pub u8);
+
+impl PackedYaw {
+
+    /// Decode into radians.
+    pub fn unpack(&self) -> f32 {
+        i8_to_angle(self.0 as i8)
+    }
+
+    /// Inverse of [`Self::unpack`].
+    pub fn pack(yaw: f32) -> Self {
+        Self(angle_to_i8(yaw) as u8)
+    }
+
+}
+
+impl SimpleCodec for PackedYaw {
+    fn write(&self, write: &mut dyn Write) -> io::Result<()> {
+        write.write_u8(self.0)
+    }
+    fn read(read: &mut dyn Read) -> io::Result<Self> {
+        Ok(Self(read.read_u8()?))
+    }
+}
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn xyz_roundtrip() {
+        // Tolerance scales with magnitude: this is a floating-point-style compression
+        // (4-bit exponent + 12-bit mantissa for x/z), so absolute error roughly doubles
+        // per exponent step -- checked against `getError` in `msgtypes.ipp`.
+        for &(x, y, z) in &[(0.0f32, 0.0f32, 0.0f32), (12.34, -5.6, 78.9), (-100.0, 30.0, -0.001), (509.9, 511.9, -509.9)] {
+            let scale = 1.0f32;
+            let packed = PackedXyz::pack(Vec3::new(x, y, z), scale);
+            let unpacked = packed.unpack(scale);
+            let tol = |v: f32| (v.abs() / 256.0).max(0.02);
+            assert!((unpacked.x - x).abs() < tol(x), "x: {} vs {}", unpacked.x, x);
+            assert!((unpacked.y - y).abs() < tol(y), "y: {} vs {}", unpacked.y, y);
+            assert!((unpacked.z - z).abs() < tol(z), "z: {} vs {}", unpacked.z, z);
+        }
+    }
+
+    #[test]
+    fn xz_roundtrip() {
+        let packed = PackedXz::pack(12.34, -56.78, 1.0);
+        let (x, z) = packed.unpack(1.0);
+        assert!((x - 12.34).abs() < 0.05);
+        assert!((z - (-56.78)).abs() < 0.05);
+    }
+
+    /// The bit allocation must exactly fill the wire widths (6 bytes for `PackedXyz`, 3
+    /// for `PackedXz`). `msgtypes.hpp` enforces this at compile time with
+    /// `#error Unused bits in ... position update`, so a split that leaves slack -- as
+    /// the vanilla 3/8/4/11 one did, summing to 40 bits rather than 48 -- is wrong by
+    /// construction, whatever else it decodes to.
+    #[test]
+    fn packed_position_bit_budget_fills_wire_width() {
+        let xyz_bits = (1 + EXPONENT_BITS_XZ + XYZ_MANTISSA_BITS_XZ) * 2
+            + (1 + XYZ_EXPONENT_BITS_Y + XYZ_MANTISSA_BITS_Y);
+        assert_eq!(xyz_bits, 48, "PackedXyz must be exactly 6 bytes");
+        assert_eq!(xyz_bits % 8, 0, "PackedXyz would trip `#error Unused bits`");
+
+        let xz_bits = (1 + EXPONENT_BITS_XZ + XZ_MANTISSA_BITS_XZ) * 2;
+        assert_eq!(xz_bits, 24, "PackedXz must be exactly 3 bytes");
+        assert_eq!(xz_bits % 8, 0, "PackedXz would trip `#error Unused bits`");
+
+        // And the codecs' buffers must agree with those budgets.
+        assert_eq!(PackedXyz([0; 6]).0.len() * 8, xyz_bits as usize);
+        assert_eq!(PackedXz([0; 3]).0.len() * 8, xz_bits as usize);
+    }
+
+    /// `BW_ROUNDF` is `floor(v + 0.5)`, not Rust's `f32::round` -- they part ways on
+    /// negative halves, which is exactly where a silent drift bug would hide.
+    #[test]
+    fn reference_position_rounds_half_up() {
+        let r = calculate_reference_position(Vec3::new(-2.5, 2.5, 0.49));
+        assert_eq!(r.x, -2.0, "half-up, not away-from-zero (f32::round gives -3)");
+        assert_eq!(r.y, 3.0);
+        assert_eq!(r.z, 0.0);
+        assert_ne!(r.x, (-2.5f32).round(), "must differ from f32::round here");
+
+        let r = calculate_reference_position(Vec3::new(-0.5, 1.4999, -1.5));
+        assert_eq!(r.x, 0.0);
+        assert_eq!(r.y, 1.0);
+        assert_eq!(r.z, -1.0);
+    }
+
+    #[test]
+    fn ypr_roundtrip_half_pitch() {
+        let packed = PackedYawPitchRoll::pack(1.0, 0.5, -2.0, true);
+        let (yaw, pitch, roll) = packed.unpack(true);
+        assert!((yaw - 1.0).abs() < 0.03, "yaw {yaw}");
+        assert!((pitch - 0.5).abs() < 0.03, "pitch {pitch}");
+        assert!((roll - (-2.0)).abs() < 0.03, "roll {roll}");
+    }
+
+    #[test]
+    fn ypr_roundtrip_full_pitch() {
+        let packed = PackedYawPitchRoll::pack(1.0, -2.5, 3.0, false);
+        let (yaw, pitch, roll) = packed.unpack(false);
+        assert!((yaw - 1.0).abs() < 0.03, "yaw {yaw}");
+        assert!((pitch - (-2.5)).abs() < 0.03, "pitch {pitch}");
+        assert!((roll - 3.0).abs() < 0.03, "roll {roll}");
+    }
+
+    #[test]
+    fn yaw_pitch_roundtrip() {
+        let packed = PackedYawPitch::pack(1.2, -0.7);
+        let (yaw, pitch) = packed.unpack();
+        assert!((yaw - 1.2).abs() < 0.03, "yaw {yaw}");
+        assert!((pitch - (-0.7)).abs() < 0.03, "pitch {pitch}");
+    }
+
+    #[test]
+    fn yaw_roundtrip() {
+        let packed = PackedYaw::pack(-1.5);
+        assert!((packed.unpack() - (-1.5)).abs() < 0.03);
+    }
+}

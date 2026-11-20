@@ -1,0 +1,310 @@
+{
+ "formatVersion": 1,
+ "generatedBy": ".scratch/research/bwxml/build_entity_tables.py",
+ "note": "Two different id spaces are relevant on the wire. (1) BigWorld entitydef method ids are implicit (declaration order, exposed-only) - see entity-bases.json. (2) The WoT Account entity takes a CMD_* integer as its first argument (doCmdInt*/doCmdStr/doCmdIntArr); those values are the AccountCommands.CMD_* constants below and are what a 0.6.5 client sends to the baseapp. command_mapping.xml is NOT a command-id table: it only maps command names to keyboard bindings.",
+ "accountCommands": {
+  "source": ".scratch/research/decompiled/common/AccountCommands.py",
+  "CMD": {
+   "CMD_RESERVED": 0,
+   "CMD_SYNC_DATA": 100,
+   "CMD_EQUIP": 101,
+   "CMD_EQUIP_OPTDEV": 102,
+   "CMD_EQUIP_SHELLS": 103,
+   "CMD_EQUIP_EQS": 104,
+   "CMD_EQUIP_TMAN": 105,
+   "CMD_REPAIR": 106,
+   "CMD_VEH_SETTINGS": 107,
+   "CMD_VEH_CAMOUFLAGE": 120,
+   "CMD_VEH_HORN": 121,
+   "CMD_TMAN_ADD_SKILL": 151,
+   "CMD_TMAN_DROP_SKILL": 152,
+   "CMD_TMAN_RESPEC": 153,
+   "CMD_TMAN_PASSPORT": 154,
+   "CMD_UNLOCK": 201,
+   "CMD_EXCHANGE": 202,
+   "CMD_FREE_XP_CONV": 203,
+   "CMD_PREMIUM": 204,
+   "CMD_BUY_SLOT": 205,
+   "CMD_BUY_BERTHS": 206,
+   "CMD_SYNC_SHOP": 300,
+   "CMD_BUY_VEHICLE": 301,
+   "CMD_BUY_ITEM": 302,
+   "CMD_BUY_TMAN": 303,
+   "CMD_SELL_VEHICLE": 304,
+   "CMD_SELL_ITEM": 305,
+   "CMD_DISMISS_TMAN": 306,
+   "CMD_PRB_JOIN": 400,
+   "CMD_PRB_LEAVE": 401,
+   "CMD_PRB_READY": 402,
+   "CMD_PRB_NOT_READY": 403,
+   "CMD_PRB_ASSIGN": 404,
+   "CMD_PRB_CH_ARENA": 405,
+   "CMD_PRB_CH_ROUND": 406,
+   "CMD_PRB_OPEN": 407,
+   "CMD_PRB_CH_COMMENT": 408,
+   "CMD_PRB_CH_ARENAVOIP": 409,
+   "CMD_PRB_TEAM_READY": 410,
+   "CMD_PRB_TEAM_NOT_READY": 411,
+   "CMD_PRB_KICK": 412,
+   "CMD_REQ_ARENA_LIST": 500,
+   "CMD_REQ_SERVER_STATS": 501,
+   "CMD_REQ_QUEUE_INFO": 502,
+   "CMD_REQ_PLAYER_DOSSIER": 503,
+   "CMD_REQ_PLAYER_CLAN_INFO": 504,
+   "CMD_REQ_PREBATTLES": 520,
+   "CMD_REQ_PREBATTLES_BY_CREATOR": 521,
+   "CMD_REQ_PREBATTLE_ROSTER": 522,
+   "CMD_SYNC_DOSSIERS": 600,
+   "CMD_ENQUEUE_FOR_ARENA": 700,
+   "CMD_DEQUEUE": 701,
+   "CMD_ACCEPT_TRADE_OFFER": 801,
+   "CMD_DECLINE_TRADE_OFFER": 802,
+   "CMD_REVOKE_TRADE_OFFER": 803,
+   "CMD_CAPTCHA_CHALLENGE": 900,
+   "CMD_SET_LANGUAGE": 1000,
+   "CMD_SET_MONEY": 10001,
+   "CMD_ADD_XP": 10002,
+   "CMD_ADD_TMAN_XP": 10003,
+   "CMD_UNLOCK_ALL": 10004,
+   "CMD_CREATE_ARENA": 10006,
+   "CMD_JOIN_ARENA": 10007,
+   "CMD_FORCE_QUEUE": 10008
+  },
+  "RES": {
+   "RES_FAILURE": -1,
+   "RES_WRONG_ARGS": -2,
+   "RES_NON_PLAYER": -3,
+   "RES_SHOP_DESYNC": -4,
+   "RES_COOLDOWN": -5,
+   "RES_HIDDEN_DOSSIER": -6,
+   "RES_SUCCESS": 0,
+   "RES_STREAM": 1,
+   "RES_CACHE": 2
+  }
+ },
+ "flags": {
+  "LOCK_REASON": {
+   "NONE": 0,
+   "ON_ARENA": 16,
+   "ROSTER": 32,
+   "IN_QUEUE": "1 | ROSTER",
+   "PREBATTLE": "2 | ROSTER"
+  },
+  "BUY_VEHICLE_FLAG": {
+   "NONE": 0,
+   "CREW": 1,
+   "SHELLS": 16
+  },
+  "SELL_VEHICLE_FLAG": {
+   "NONE": 0,
+   "CREW": 1,
+   "SHELLS": 16,
+   "EQS": 32
+  },
+  "VEHICLE_SETTINGS_FLAG": {
+   "NONE": 0,
+   "XP_TO_TMAN": 1,
+   "AUTO_REPAIR": 2,
+   "AUTO_LOAD": 4,
+   "AUTO_EQUIP": 8
+  }
+ },
+ "requestIds": {
+  "REQUEST_ID_PREBATTLES": "STREAM_ID_ACCOUNT_CMDS_MIN",
+  "REQUEST_ID_PREBATTLE_ROSTER": "STREAM_ID_ACCOUNT_CMDS_MIN + 1",
+  "REQUEST_ID_NO_RESPONSE": "STREAM_ID_ACCOUNT_CMDS_MIN + 2",
+  "REQUEST_ID_UNRESERVED_MIN": "STREAM_ID_ACCOUNT_CMDS_MIN + 20",
+  "REQUEST_ID_UNRESERVED_MAX": "STREAM_ID_ACCOUNT_CMDS_MAX"
+ },
+ "keyBindings": {
+  "source": ".scratch/research/unpacked/res/scripts/command_mapping.xml",
+  "commands": {
+   "CMD_MOVE_FORWARD": {
+    "fireKey": "KEY_W",
+    "satelliteKeys": []
+   },
+   "CMD_MOVE_BACKWARD": {
+    "fireKey": "KEY_S",
+    "satelliteKeys": []
+   },
+   "CMD_ROTATE_LEFT": {
+    "fireKey": "KEY_A",
+    "satelliteKeys": []
+   },
+   "CMD_ROTATE_RIGHT": {
+    "fireKey": "KEY_D",
+    "satelliteKeys": []
+   },
+   "CMD_INCREMENT_CRUISE_MODE": {
+    "fireKey": "KEY_R",
+    "satelliteKeys": []
+   },
+   "CMD_DECREMENT_CRUISE_MODE": {
+    "fireKey": "KEY_F",
+    "satelliteKeys": []
+   },
+   "CMD_STOP_UNTIL_FIRE": {
+    "fireKey": "KEY_SPACE",
+    "satelliteKeys": []
+   },
+   "CMD_SWITCH_SERVER_MARKER": {
+    "fireKey": "KEY_0",
+    "satelliteKeys": [
+     "KEY_CAPSLOCK"
+    ]
+   },
+   "CMD_AMMO_CHOICE_1": {
+    "fireKey": "KEY_1",
+    "satelliteKeys": []
+   },
+   "CMD_AMMO_CHOICE_2": {
+    "fireKey": "KEY_2",
+    "satelliteKeys": []
+   },
+   "CMD_AMMO_CHOICE_3": {
+    "fireKey": "KEY_3",
+    "satelliteKeys": []
+   },
+   "CMD_AMMO_CHOICE_4": {
+    "fireKey": "KEY_4",
+    "satelliteKeys": []
+   },
+   "CMD_AMMO_CHOICE_5": {
+    "fireKey": "KEY_5",
+    "satelliteKeys": []
+   },
+   "CMD_AMMO_CHOICE_6": {
+    "fireKey": "KEY_6",
+    "satelliteKeys": []
+   },
+   "CMD_AMMO_CHOICE_7": {
+    "fireKey": "KEY_7",
+    "satelliteKeys": []
+   },
+   "CMD_AMMO_CHOICE_8": {
+    "fireKey": "KEY_8",
+    "satelliteKeys": []
+   },
+   "CMD_AMMO_CHOICE_9": {
+    "fireKey": "KEY_9",
+    "satelliteKeys": []
+   },
+   "CMD_AMMO_CHOICE_0": {
+    "fireKey": "KEY_0",
+    "satelliteKeys": []
+   },
+   "CMD_CHAT_SHORTCAT_ATTACK_MY_TARGET": {
+    "fireKey": "KEY_T",
+    "satelliteKeys": []
+   },
+   "CMD_CHAT_SHORTCAT_ATTACK": {
+    "fireKey": "KEY_F2",
+    "satelliteKeys": []
+   },
+   "CMD_CHAT_SHORTCAT_BACKTOBASE": {
+    "fireKey": "KEY_F3",
+    "satelliteKeys": []
+   },
+   "CMD_CHAT_SHORTCAT_FOLLOWME": {
+    "fireKey": "KEY_F4",
+    "satelliteKeys": []
+   },
+   "CMD_CHAT_SHORTCAT_POSITIVE": {
+    "fireKey": "KEY_F5",
+    "satelliteKeys": []
+   },
+   "CMD_CHAT_SHORTCAT_NEGATIVE": {
+    "fireKey": "KEY_F6",
+    "satelliteKeys": []
+   },
+   "CMD_CHAT_SHORTCAT_HELPME": {
+    "fireKey": "KEY_F7",
+    "satelliteKeys": []
+   },
+   "CMD_CM_SHOOT": {
+    "fireKey": "KEY_LEFTMOUSE",
+    "satelliteKeys": []
+   },
+   "CMD_CM_FREE_CAMERA": {
+    "fireKey": "KEY_RIGHTMOUSE",
+    "satelliteKeys": []
+   },
+   "CMD_CM_LOCK_TARGET": {
+    "fireKey": "KEY_RIGHTMOUSE",
+    "satelliteKeys": []
+   },
+   "CMD_CM_LOCK_TARGET_OFF": {
+    "fireKey": "KEY_E",
+    "satelliteKeys": []
+   },
+   "CMD_CM_CAMERA_ROTATE_LEFT": {
+    "fireKey": "KEY_LEFTARROW",
+    "satelliteKeys": []
+   },
+   "CMD_CM_CAMERA_ROTATE_RIGHT": {
+    "fireKey": "KEY_RIGHTARROW",
+    "satelliteKeys": []
+   },
+   "CMD_CM_CAMERA_ROTATE_UP": {
+    "fireKey": "KEY_UPARROW",
+    "satelliteKeys": []
+   },
+   "CMD_CM_CAMERA_ROTATE_DOWN": {
+    "fireKey": "KEY_DOWNARROW",
+    "satelliteKeys": []
+   },
+   "CMD_CM_VEHICLE_SWITCH_AUTOROTATION": {
+    "fireKey": "KEY_X",
+    "satelliteKeys": []
+   },
+   "CMD_CM_INCREASE_ZOOM": {
+    "fireKey": "KEY_PGDN",
+    "satelliteKeys": []
+   },
+   "CMD_CM_DECREASE_ZOOM": {
+    "fireKey": "KEY_PGUP",
+    "satelliteKeys": []
+   },
+   "CMD_CM_ALTERNATE_MODE": {
+    "fireKey": "KEY_LSHIFT",
+    "satelliteKeys": []
+   },
+   "CMD_CM_CAMERA_RESTORE_DEFAULT": {
+    "fireKey": "KEY_HOME",
+    "satelliteKeys": []
+   },
+   "CMD_CM_POSTMORTEM_NEXT_VEHICLE": {
+    "fireKey": "KEY_LEFTMOUSE",
+    "satelliteKeys": []
+   },
+   "CMD_CM_POSTMORTEM_SELF_VEHICLE": {
+    "fireKey": "KEY_RIGHTMOUSE",
+    "satelliteKeys": []
+   },
+   "CMD_VEHICLE_MARKERS_SHOW_INFO": {
+    "fireKey": "KEY_LALT",
+    "satelliteKeys": []
+   },
+   "CMD_AMMO_PANEL_SELECT": {
+    "fireKey": "KEY_LEFTMOUSE",
+    "satelliteKeys": []
+   },
+   "CMD_MINIMAP_HIGHLIGHT_CELL": {
+    "fireKey": "KEY_LEFTMOUSE",
+    "satelliteKeys": []
+   },
+   "CMD_MINIMAP_VEHICLE_SPECIFIC": {
+    "fireKey": "KEY_RIGHTMOUSE",
+    "satelliteKeys": []
+   },
+   "CMD_VOICECHAT_MUTE": {
+    "fireKey": "KEY_Q",
+    "satelliteKeys": []
+   },
+   "CMD_USE_HORN": {
+    "fireKey": "KEY_H",
+    "satelliteKeys": []
+   }
+  }
+ }
+}

@@ -1,0 +1,30 @@
+[package]
+name = "bw201"
+version = "0.1.0"
+edition = "2021"
+description = "BigWorld 2.0.1 (WoT 0.6.5) connection-layer primitives: BinaryStream, Mercury packets/bundles, RSA/Blowfish filters and the LoginApp handshake"
+license = "MIT OR Apache-2.0"
+
+[lib]
+name = "bw201"
+path = "src/lib.rs"
+
+[[bin]]
+name = "bw201-login"
+path = "src/bin/bw201-login.rs"
+
+[dependencies]
+thiserror = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+rsa = { version = "0.9", features = ["pem"] }
+sha1 = "0.10"
+blowfish = "0.9"
+cipher = "0.4"
+rand = "0.8"
+hex = "0.4"
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[dev-dependencies]

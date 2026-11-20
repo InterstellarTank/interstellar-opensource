@@ -1,0 +1,35 @@
+﻿[package]
+name = "wot-baseapp"
+version = "0.1.0"
+edition = "2021"
+description = "World of Tanks 0.6.5 BaseApp UDP Mercury server and hangar session handler"
+license = "MIT OR Apache-2.0"
+
+[lib]
+name = "wot_baseapp"
+path = "src/lib.rs"
+
+[[bin]]
+name = "wot-baseapp"
+path = "src/main.rs"
+
+[dependencies]
+bw201 = { path = "../bw201" }
+wot065-data = { path = "../wot065-data" }
+wot-battle = { path = "../wot-battle" }
+glam = "0.29"
+tokio = { version = "1", features = ["rt-multi-thread", "net", "io-util", "macros", "time", "sync", "signal"] }
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+anyhow = "1"
+thiserror = "1"
+hex = "0.4"
+rand = "0.8"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[dev-dependencies]
+glam = "0.29"
+rsa = { version = "0.9", features = ["pem"] }
+sha1 = "0.10"

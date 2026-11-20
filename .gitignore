@@ -1,0 +1,16 @@
+﻿/target
+/target/
+**/target/
+/.scratch/*
+!/.scratch/research/
+/.scratch/research/*
+!/.scratch/research/decompiled/
+/.scratch/research/decompiled/*
+!/.scratch/research/decompiled/client/
+!/.scratch/research/decompiled/common/
+/.superpowers
+/crates/wot065-data/out
+/keys
+*.log
+Influx_PS.log
+python.log

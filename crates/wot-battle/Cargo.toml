@@ -1,0 +1,18 @@
+[package]
+name = "wot-battle"
+version = "0.1.0"
+edition = "2021"
+description = "World of Tanks 0.6.5 pure-Rust battle world asset loaders, spatial simulation, and lobby/arena state"
+license = "MIT"
+
+[dependencies]
+bw201 = { path = "../bw201" }
+wot065-data = { path = "../wot065-data" }
+flate2 = "1"
+glam = "0.29"
+png = "0.17"
+rand = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "1"
+tracing = "0.1"

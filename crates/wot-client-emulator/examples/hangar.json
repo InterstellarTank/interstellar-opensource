@@ -1,0 +1,10 @@
+{
+  "steps": [
+    { "action": "wait_hangar" },
+    { "action": "command", "id": 501, "expect": 0 },
+    { "action": "wait_event", "id": 146, "phase": "hangar", "player_method": true },
+    { "action": "notify", "id": 502 },
+    { "action": "wait_event", "id": 147, "phase": "hangar", "player_method": true },
+    { "action": "assert", "source": "dossiers", "path": [0], "equals": 1 }
+  ]
+}

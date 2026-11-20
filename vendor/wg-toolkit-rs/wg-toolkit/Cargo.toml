@@ -1,0 +1,40 @@
+[package]
+name = "wg-toolkit"
+description = "Toolkit for various binary and text formats distributed by Wargaming.net (BigWorld, Core engine)."
+categories = ["games", "parsing", "data-structures"]
+edition.workspace = true
+version.workspace = true
+authors.workspace = true
+homepage.workspace = true
+repository.workspace = true
+license.workspace = true
+readme.workspace = true
+
+[dependencies]
+thiserror.workspace = true
+byteorder.workspace = true
+smallvec.workspace = true
+base64.workspace = true
+glam.workspace = true
+indexmap.workspace = true
+tracing.workspace = true
+flate2.workspace = true
+png.workspace = true
+
+bitflags.workspace = true
+paste.workspace = true
+
+crossbeam-channel.workspace = true
+
+crypto-common.workspace = true
+blowfish.workspace = true
+sha2.workspace = true
+sha1.workspace = true
+rand.workspace = true
+rsa.workspace = true
+
+[features]
+default = []
+
+[lib]
+name = "wgtk"
